@@ -1,0 +1,131 @@
+'use client';
+import { Text } from 'rizzui';
+import { Badge } from 'rizzui';
+import { HeaderCell } from 'common/table';
+import DateCell from 'common/date-cell';
+import BranchForm from './branch-form';
+import { UpdateDrawer } from 'common/table & form/update-drawer';
+
+export type Branch = {
+  Id: string;
+  BranchId: string;
+  BranchName: string;
+  Address1: string;
+  Address2: string;
+  LandMark: string;
+  GstNo: string;
+  CityId: string;
+  CreatedOn: Date;
+  CreatedBy: string;
+  IsActive: boolean;
+};
+
+function getStatusBadge(IsActive: boolean) {
+  switch (IsActive) {
+    case false:
+      return (
+        <div className="flex items-center">
+          <Badge color="warning" renderAsDot />
+          <Text className="ms-2 font-medium text-orange-dark">inactive</Text>
+        </div>
+      );
+    case true:
+      return (
+        <div className="flex items-center">
+          <Badge color="success" renderAsDot />
+          <Text className="ms-2 font-medium text-green-dark">active</Text>
+        </div>
+      );
+  }
+}
+
+type Columns = {
+  data: any[];
+  sortConfig?: any;
+  handleSelectAll: any;
+  checkedItems: string[];
+  onHeaderCellClick: (value: string) => void;
+  onChecked?: (id: string) => void;
+};
+
+export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => [
+  {
+    title: <HeaderCell title="No" />,
+    dataIndex: 'Id',
+    key: 'id',
+    width: 50,
+    render: (_: string, row: Branch, index: number) => <span>{index + 1}</span>,
+  },
+  {
+    title: <HeaderCell title="BranchName" />,
+    dataIndex: 'BranchName',
+    key: 'BranchName',
+    width: 250,
+    hidden: 'BranchName',
+    render: (_: string, row: Branch) => (
+      <div className="flex items-center">
+        <>{row.BranchName}</>
+        <UpdateDrawer title="Update Branch">
+          <BranchForm isEdit={true} data={row} />
+        </UpdateDrawer>
+      </div>
+    ),
+  },
+  {
+    title: <HeaderCell title="MobileNo" />,
+    dataIndex: 'MobileNo',
+    key: 'MobileNo',
+    width: 100,
+    render: (value: string) => value,
+  },
+  {
+    title: <HeaderCell title="Address1" />,
+    dataIndex: 'Address1',
+    key: 'Address1',
+    width: 100,
+    render: (value: string) => value,
+  },
+  {
+    title: <HeaderCell title="City" />,
+    dataIndex: 'CityName',
+    key: 'CityName',
+    width: 120,
+    render: (value: string) => value,
+  },
+  {
+    title: <HeaderCell title="GstNo" />,
+    dataIndex: 'GstNo',
+    key: 'GstNo',
+    width: 170,
+    render: (GstNo: string) => GstNo,
+  },
+  {
+    title: (
+      <HeaderCell
+        title="Created Date"
+        sortable
+        ascending={sortConfig?.direction === 'asc' && sortConfig?.key === 'CreatedOn'}
+        descending={sortConfig?.direction === 'desc' && sortConfig?.key === 'CreatedOn'}
+      />
+    ),
+    onHeaderCell: () => onHeaderCellClick('CreatedOn'),
+    dataIndex: 'CreatedOn',
+    key: 'CreatedOn',
+    width: 150,
+    render: (value: Date) => <DateCell date={value} />,
+  },
+  {
+    title: <HeaderCell title="CreatedBy" />,
+    dataIndex: 'CreatedBy',
+    key: 'CreatedBy',
+    width: 200,
+    render: (value: string) => value.toLowerCase(),
+  },
+  {
+    title: <HeaderCell title="IsActive" />,
+    dataIndex: 'IsActive',
+    key: 'IsActive',
+    width: 80,
+    render: (value: boolean) => getStatusBadge(value),
+  },
+];

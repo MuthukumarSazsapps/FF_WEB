@@ -1,0 +1,26 @@
+'use client';
+
+import { useEffect } from 'react';
+import { Drawer } from 'rizzui';
+import { useDrawer } from '../hooks/use-drawer';
+
+export default function GlobalDrawer() {
+  const { isOpen, view, placement, customSize, closeDrawer } = useDrawer();
+  const pathname = window.location.pathname;
+  useEffect(() => {
+    closeDrawer();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
+
+  return (
+    <Drawer
+      isOpen={isOpen}
+      onClose={closeDrawer}
+      placement={placement}
+      customSize={customSize}
+      overlayClassName="dark:bg-opacity-40 dark:backdrop-blur-md"
+      containerClassName="dark:bg-gray-100">
+      {view}
+    </Drawer>
+  );
+}
