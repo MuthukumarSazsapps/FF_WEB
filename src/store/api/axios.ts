@@ -1,7 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:5000/',
+  // baseURL: 'http://localhost:5000/',
+  baseURL: 'https://finance-full-stack-api-9xk.vercel.app/',
+
   // baseURL:  process.env.REACT_APP_API_URL,
 });
 
