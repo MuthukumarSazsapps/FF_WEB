@@ -5,7 +5,7 @@ export const LoanFormSchema = z
   .object({
     BranchId: z.string().min(1, { message: messages.branchRequired }),
     CustomerId: z.string().min(1, { message: messages.customerNameIsRequired }),
-    RegisterNumber: z.string().min(1, { message: messages.registerNumberRequired }),
+    RegisterNumber: z.string().optional(),
     ShowRoomId: z.string().min(1, { message: messages.showroomRequired }),
     VehicleTypeId: z.string().min(1, { message: messages.vehicleTypeRequired }),
     MadeYear: z.coerce.number().min(1, { message: messages.MadeYearRequired }),
