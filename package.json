@@ -2,7 +2,6 @@
   "name": "sazs-finance",
   "version": "1.0.0",
   "description": "An finance management application front-end",
-  "main": "src/index.tsx",
   "repository": "https://github.com/GaneshKumar932/sazs-finance.git",
   "author": "SAZS",
   "license": "MIT",
