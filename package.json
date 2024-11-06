@@ -6,7 +6,6 @@
   "author": "SAZS",
   "license": "MIT",
   "type": "module",
-  "main": "index.tsx",
   "scripts": {
     "start": "react-scripts start",
     "prepare": "husky install",
