@@ -29,8 +29,8 @@ export const LoanFormSchema = z
     LoanStartDate: z.coerce.string().min(10, { message: messages.LoanStartDateRequired }),
     LoanEndDate: z.coerce.string(),
     DocumentCharges: z.coerce.number().min(1, { message: messages.DocumentChargesRequired }),
-    AgentId: z.string().min(1, { message: messages.AgentIdRequired }),
-    AgentCommission: z.coerce.number().min(1, { message: messages.AgentCommissionRequired }),
+    AgentId: z.string().optional(),
+    AgentCommission: z.coerce.number().optional(),
     IsActive: z.boolean(),
   })
   .refine(

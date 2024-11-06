@@ -32,7 +32,7 @@ const createCustomer = async (
   formData.append('BranchId', CustomerData.BranchId);
   formData.append('CustomerName', CustomerData.CustomerName);
   formData.append('CustomerFatherName', CustomerData.CustomerFatherName);
-  formData.append('CustomerDOB', CustomerData.CustomerDOB);
+  formData.append('CustomerDOB', CustomerData.CustomerDOB ? CustomerData.CustomerDOB : '');
   formData.append('CustomerGender', CustomerData.CustomerGender);
   formData.append('CustomerAddress', CustomerData.CustomerAddress);
   formData.append('CustomerCity', CustomerData.CustomerCity);
@@ -81,7 +81,7 @@ const updateCustomer = async (
   formData.append('BranchId', CustomerData.BranchId);
   formData.append('CustomerName', CustomerData.CustomerName);
   formData.append('CustomerFatherName', CustomerData.CustomerFatherName);
-  formData.append('CustomerDOB', CustomerData.CustomerDOB);
+  formData.append('CustomerDOB', CustomerData.CustomerDOB ? CustomerData.CustomerDOB : '');
   formData.append('CustomerGender', CustomerData.CustomerGender);
   formData.append('CustomerAddress', CustomerData.CustomerAddress);
   formData.append('CustomerCity', CustomerData.CustomerCity);

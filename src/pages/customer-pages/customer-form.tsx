@@ -163,10 +163,10 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
           className="col-span-2"
           requiredfield="true"
           maxLength={10}
+          phoneNoInput={true}
           placeholder="Enter Mobile No"
           name="CustomerAlternatePhoneNo"
           register={register}
-          phoneNoInput={true}
           error={errors.CustomerAlternatePhoneNo?.message}
         />
         <Input

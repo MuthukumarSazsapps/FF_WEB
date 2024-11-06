@@ -14,7 +14,7 @@ export const CustomerFormSchema = z.object({
     .string()
     .min(1, { message: messages.fathernameIsRequired })
     .regex(/^[a-zA-Z]+$/, { message: 'letters Only allowed' }),
-  CustomerDOB: z.coerce.string().min(10, { message: messages.customerDOBIsRequired }),
+  CustomerDOB: z.coerce.string().optional(),
   CustomerGender: z.string().min(1, { message: messages.genderIsRequired }),
   CustomerAddress: z.string().min(1, { message: messages.addressIsRequired }),
   CustomerCity: z.string().min(1, { message: messages.cityIdRequired }),
