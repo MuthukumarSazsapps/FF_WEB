@@ -97,7 +97,7 @@ export default function CustomerReportPage() {
             </div>
             <div className="w-2/12">
               <Button
-                label={loanInfo.RemainingDue ? 'PAY DUE' : 'Loan Closed'}
+                label={loanInfo.RemainingDue ? '₹ PAY DUE' : 'Loan Closed'}
                 className="dark:bg-blue-700 w-full"
                 disabled={!loanInfo.RemainingDue}
                 color="success"

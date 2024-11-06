@@ -6,10 +6,22 @@ import ProfileMenu from '../layouts/profile-menu';
 import SettingsButton from '../components/settings/settings-button';
 import RingBellSolidIcon from '../components/icons/ring-bell-solid';
 import ChatSolidIcon from '../components/icons/chat-solid';
+import Button from 'common/button';
+import { Link } from 'react-router-dom';
 
 export default function HeaderMenuRight() {
   return (
-    <div className="ms-auto grid shrink-0 grid-cols-3 items-center gap-2 text-gray-700 xs:gap-3 xl:gap-4">
+    // <div className="ms-auto grid shrink-0 grid-cols-4 items-center gap-2 text-gray-700 xs:gap-3 xl:gap-4">
+    <div className="ms-auto flex shrink-0 grid-cols-4 items-center gap-2 text-gray-700 xs:gap-3 xl:gap-4">
+      <Link to="/customer/report">
+        <Button
+          label="₹ Pay Due"
+          color="success"
+          type="button"
+          variant="solid"
+          // onClick={() => ()}
+        />
+      </Link>
       <MessagesDropdown>
         <ActionIcon
           aria-label="Messages"
