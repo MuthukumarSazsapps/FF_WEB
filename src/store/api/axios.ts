@@ -20,8 +20,6 @@ axiosInstance.interceptors.request.use(
   },
   error => {
     console.log('authonticate error', error);
-
-    //  Promise.reject(error);
   },
 );
 
