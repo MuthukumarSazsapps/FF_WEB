@@ -35,6 +35,7 @@ const createCustomer = async (
   formData.append('CustomerDOB', CustomerData.CustomerDOB ? CustomerData.CustomerDOB : '');
   formData.append('CustomerGender', CustomerData.CustomerGender);
   formData.append('CustomerAddress', CustomerData.CustomerAddress);
+  formData.append('CustomerProfession', CustomerData.CustomerProfession || '');
   formData.append('CustomerCity', CustomerData.CustomerCity);
   formData.append('CustomerAADHAAR', CustomerData.CustomerAADHAAR);
   formData.append('CustomerDrivingLicenseNo', CustomerData.CustomerDrivingLicenseNo || '');
@@ -84,6 +85,7 @@ const updateCustomer = async (
   formData.append('CustomerDOB', CustomerData.CustomerDOB ? CustomerData.CustomerDOB : '');
   formData.append('CustomerGender', CustomerData.CustomerGender);
   formData.append('CustomerAddress', CustomerData.CustomerAddress);
+  formData.append('CustomerProfession', CustomerData.CustomerProfession || '');
   formData.append('CustomerCity', CustomerData.CustomerCity);
   formData.append('CustomerAADHAAR', CustomerData.CustomerAADHAAR);
   formData.append('CustomerDrivingLicenseNo', CustomerData.CustomerDrivingLicenseNo || '');

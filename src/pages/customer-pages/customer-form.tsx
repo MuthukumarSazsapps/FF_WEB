@@ -182,13 +182,22 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
         <Input
           register={register}
           label="Customer Address"
-          className="col-span-6"
+          className="col-span-4"
           requiredfield="true"
           prefix={<PiFileLock className="h-6 w-6 text-gray-500" />}
           type="text"
           placeholder="Enter Address"
           name="CustomerAddress"
           error={errors.CustomerAddress?.message}
+        />
+        <Input
+          type="text"
+          label="Customer Profession"
+          className="col-span-2"
+          requiredfield="true"
+          placeholder="Customer Profession"
+          name="CustomerProfession"
+          register={register}
         />
         <Controller
           control={control}

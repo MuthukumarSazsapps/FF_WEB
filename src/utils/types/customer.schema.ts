@@ -17,6 +17,7 @@ export const CustomerFormSchema = z.object({
   CustomerDOB: z.coerce.string().optional(),
   CustomerGender: z.string().min(1, { message: messages.genderIsRequired }),
   CustomerAddress: z.string().min(1, { message: messages.addressIsRequired }),
+  CustomerProfession: z.string().optional(),
   CustomerCity: z.string().min(1, { message: messages.cityIdRequired }),
   CustomerAADHAAR: z.string().min(1, { message: messages.aadhaarRequired }),
   CustomerDrivingLicenseNo: z
@@ -74,6 +75,7 @@ export const CustomerFormDefaultValues = {
   CustomerDOB: '',
   CustomerGender: '',
   CustomerAddress: '',
+  CustomerProfession: '',
   CustomerCity: '',
   CustomerAADHAAR: '',
   CustomerDrivingLicenseNo: '',
