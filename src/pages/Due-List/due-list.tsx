@@ -224,7 +224,7 @@ export default function CustomerReportPage() {
               </div>
               <div className="flex-col basis-1/5 gap-3">
                 <p className="font-bold">Pending Capital</p>
-                <p>{loanInfo.PendingCapiatal}</p>
+                <p>{loanInfo.PendingCapital}</p>
               </div>
               <div className="flex-col basis-1/5 gap-3">
                 <p className="font-bold">Pending Interest</p>
