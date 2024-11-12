@@ -512,7 +512,7 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
             if (!isNaN(val) && interest) {
               const principle = val - interest;
               if (principle > 0) {
-                setValue('PrincipalAmount', principle);
+                setValue('PrincipalAmount',Math.round(principle));
               }
             }
           }}
@@ -535,7 +535,7 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
           register={register}
           label="InterestAmount"
           className="col-span-2"
-          value={emiCall?.Interest}
+          // value={emiCall?.Interest}
           type="number"
           disabled
           requiredfield="true"
@@ -765,7 +765,7 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
             }, [branchOpt, loanType]);
             useEffect(() => {
               if (emiCall?.Interest) {
-                setValue('InterestAmount', emiCall?.Interest);
+                setValue('InterestAmount', Math.round(emiCall?.Interest));
               }
             }, [emiCall]);
 
