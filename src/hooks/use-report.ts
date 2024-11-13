@@ -36,6 +36,10 @@ const usePendingListState = (apiFlags = defaultAPIFlags): UseReportReturn => {
     state => state.report.list,
   );
   const listLoading = useSelector<RootState, boolean>(state => state.report.listAPI.loading);
+  const defaultListLoading = useSelector<RootState, boolean>(
+    state => state.report.defaultlistAPI.loading,
+  );
+
   const updatePendingRemarks = useSelector<RootState, string>(
     state => state.report.updateAPI.success || '',
   );
@@ -53,7 +57,7 @@ const usePendingListState = (apiFlags = defaultAPIFlags): UseReportReturn => {
   const defaultList = useSelector<RootState, PendingRemarksFormFieldTypes[]>(
     state => state.report.defaultlist,
   );
-  const loading = listLoading;
+  const loading = listLoading || defaultListLoading;
   const { username, subscriber, branch } = useLocalData();
 
   useEffect(() => {

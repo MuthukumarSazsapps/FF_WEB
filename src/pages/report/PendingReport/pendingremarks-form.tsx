@@ -29,7 +29,7 @@ export default function PendingForm({ data }: { data?: any }) {
   const { closeDrawer } = useDrawer();
 
   useEffect(() => {
-    if (updatePendingRemarks === 'Pending Remarks updated successfully') {
+    if (updatePendingRemarks === 'Pending Remarks updated Successfully') {
       toast.success(
         <Text as="b" className="font-semibold">
           PendingRemarks Updated Succesfully

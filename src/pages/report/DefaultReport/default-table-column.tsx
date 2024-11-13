@@ -97,7 +97,7 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     dataIndex: 'EmiAmount',
     key: 'EmiAmount',
     width: 130,
-    render: (value: Number) => value,
+    render: (value: Number) => '₹ ' + value,
   },
   {
     title: <HeaderCell title="Tenure" />,
@@ -140,7 +140,14 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     key: 'Contact',
     width: 300,
     render: (value: string, row: any) =>
-      row.Contact2 ? row.Contact1 + ',' + row.Contact2 : row.Contact1,
+      row.Contact2 ? (
+        <>
+          {row.Contact1} <br />
+          {row.Contact2}
+        </>
+      ) : (
+        row.Contact1
+      ),
   },
   {
     title: <HeaderCell title="Remarks" />,

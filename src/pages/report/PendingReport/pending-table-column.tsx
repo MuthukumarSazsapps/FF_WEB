@@ -82,8 +82,8 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     title: <HeaderCell title="Due Amount" width={200} />,
     dataIndex: 'EmiAmount',
     key: 'EmiAmount',
-    width: 150,
-    render: (value: Number) => value,
+    width: 200,
+    render: (value: Number) => '₹ ' + value,
   },
   {
     title: <HeaderCell title="Pending Due" />,
@@ -96,7 +96,7 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     title: <HeaderCell title="Due.No" />,
     dataIndex: 'CurrentDue',
     key: 'CurrentDue',
-    width: 150,
+    width: 250,
     render: (value: Number) => value,
   },
   {
@@ -171,7 +171,7 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     onHeaderCell: () => onHeaderCellClick('ModifiedOn'),
     dataIndex: 'ModifiedOn',
     key: 'ModifiedOn',
-    width: 150,
+    width: 200,
     render: (value: Date) => (value ? <DateCell date={value} /> : '----'),
   },
 ];

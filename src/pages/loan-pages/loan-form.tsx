@@ -509,10 +509,12 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
           onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
             const val = parseFloat(e.target.value);
             const interest = emiCall?.Interest;
+            const cemi = getValues().CalculatedEmiAmount;
             if (!isNaN(val) && interest) {
-              const principle = val - interest;
+              // const principle = val - interest;
+              const principle = cemi - Math.round(interest);
               if (principle > 0) {
-                setValue('PrincipalAmount',Math.round(principle));
+                setValue('PrincipalAmount', Math.round(principle));
               }
             }
           }}
