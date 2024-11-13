@@ -512,9 +512,9 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
             const cemi = getValues().CalculatedEmiAmount;
             if (!isNaN(val) && interest) {
               // const principle = val - interest;
-              const principle = cemi - Math.round(interest);
+              const principle = Math.ceil(cemi) - Math.ceil(interest);
               if (principle > 0) {
-                setValue('PrincipalAmount', Math.round(principle));
+                setValue('PrincipalAmount', principle);
               }
             }
           }}
