@@ -60,7 +60,7 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     title: <HeaderCell title="CustomerId" />,
     dataIndex: 'CustomerId',
     key: 'CustomerId',
-    width: 150,
+    width: 200,
     render: (value: string) => value,
   },
   {
@@ -68,21 +68,21 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
       <HeaderCell
         title="Due Date"
         sortable
-        ascending={sortConfig?.direction === 'asc' && sortConfig?.key === 'LastEmiDate'}
-        descending={sortConfig?.direction === 'desc' && sortConfig?.key === 'LastEmiDate'}
+        ascending={sortConfig?.direction === 'asc' && sortConfig?.key === 'DueDate'}
+        descending={sortConfig?.direction === 'desc' && sortConfig?.key === 'DueDate'}
       />
     ),
-    onHeaderCell: () => onHeaderCellClick('LastEmiDate'),
+    onHeaderCell: () => onHeaderCellClick('DueDate'),
     dataIndex: 'DueDate',
     key: 'DueDate',
-    width: 150,
-    render: (value: Date) => <DateCell date={value} time={false} />,
+    width: 250,
+    render: (value: Date) => (value ? <DateCell date={value} time={false} /> : '----'),
   },
   {
-    title: <HeaderCell title="Due Amount" />,
+    title: <HeaderCell title="Due Amount" width={200} />,
     dataIndex: 'EmiAmount',
     key: 'EmiAmount',
-    width: 130,
+    width: 150,
     render: (value: Number) => value,
   },
   {
@@ -128,13 +128,29 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     width: 200,
     render: (value: string) => value ?? '----',
   },
+  // {
+  //   title: <HeaderCell title="Contact" />,
+  //   dataIndex: 'Contact',
+  //   key: 'Contact',
+  //   width: 300,
+  //   render: (value: string, row: any) =>
+  //     row.Contact2 ? row.Contact1 + ','+ row.Contact2 : row.Contact1,
+  // },
   {
     title: <HeaderCell title="Contact" />,
     dataIndex: 'Contact',
     key: 'Contact',
     width: 300,
     render: (value: string, row: any) =>
-      row.Contact2 ? row.Contact1 + ',' + row.Contact2 : row.Contact1,
+      row.Contact2 ? (
+        <>
+          {row.Contact1}
+          <br />
+          {row.Contact2}
+        </>
+      ) : (
+        row.Contact1
+      ),
   },
   {
     title: <HeaderCell title="Remarks" />,

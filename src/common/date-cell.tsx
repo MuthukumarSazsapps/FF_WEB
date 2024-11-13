@@ -16,7 +16,7 @@ export default function DateCell({
   className,
   timeClassName,
   dateClassName,
-  dateFormat = 'DD/MM/YYYY',
+  dateFormat = 'DD-MM-YYYY',
   timeFormat = 'h:mm A',
   time = true,
 }: DateCellProps) {

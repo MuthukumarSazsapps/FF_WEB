@@ -12,6 +12,7 @@ export function useTable<T extends AnyObject>(
 ) {
   const [data, setData] = useState(initialData);
   const [filterState, setFilterState] = useState(initialFilterState);
+
   /*
    * Dummy loading state.
    */
@@ -126,6 +127,107 @@ export function useTable<T extends AnyObject>(
       [columnId]: filterValue,
     }));
   }
+  //----------------------------------------------------------------
+  // function applyFilters() {
+  //   const searchTermLower = searchTerm.toLowerCase();
+  //   console.log("sortedData",filters,Object.entries(filters),sortedData);
+
+  //   return (
+  //     sortedData
+  //       .filter(item => {
+  //         const isMatchingItem = Object.entries(filters).some(([columnId, filterValue]) => {
+  //           // debugger
+  //           console.log("columnId",columnId,filterValue,Array.isArray(filterValue) && typeof filterValue[1] === 'object');
+
+  //           if (Array.isArray(filterValue) && typeof filterValue[1] === 'object') {
+  //             console.log("col",item[columnId]);
+
+  //             const itemValue = new Date(item[columnId]);
+  //             return (
+  //               // @ts-ignore
+  //               itemValue >= filterValue[0] && itemValue <= filterValue[1]
+  //             );
+  //           }
+  //           if (Array.isArray(filterValue) && typeof filterValue[1] === 'string') {
+  //             const itemPrice = Math.ceil(Number(item[columnId]));
+  //             return itemPrice >= Number(filterValue[0]) && itemPrice <= Number(filterValue[1]);
+  //           }
+  //           if (isString(filterValue) && !Array.isArray(filterValue)) {
+  //             const itemValue = item[columnId]?.toString().toLowerCase();
+  //             if (itemValue !== filterValue.toString().toLowerCase()) {
+  //               return false;
+  //             }
+  //             return true;
+  //           }
+  //         });
+  //         return isMatchingItem;
+  //       })
+  //       // global search after running filters
+  //       .filter(item =>
+  //         Object.values(item).some(value =>
+  //           typeof value === 'object'
+  //             ? value &&
+  //               Object.values(value).some(
+  //                 nestedItem =>
+  //                   nestedItem && String(nestedItem).toLowerCase().includes(searchTermLower),
+  //               )
+  //             : value && String(value).toLowerCase().includes(searchTermLower),
+  //         ),
+  //       )
+  //   );
+  // }
+  //----------------------------------------------------------------
+  // function applyFilters() {
+  //   const searchTermLower = searchTerm.toLowerCase();
+  //   //console.log("sortedData", filters, Object.entries(filters), sortedData);
+
+  //   return (
+  //     sortedData
+  //       .filter(item => {
+  //         const isMatchingItem = Object.entries(filters).some(([columnId, filterValue]) => {
+  //           //console.log("columnId", columnId, filterValue, Array.isArray(filterValue) && typeof filterValue[1] === 'object');
+
+  //           // Date range filter
+  //           if (Array.isArray(filterValue) && typeof filterValue[1] === 'object') {
+  //             const itemValue = item[columnId] ? new Date(item[columnId]) : null;
+  //             if (itemValue && filterValue[0] && filterValue[1]) {
+  //               return itemValue >= filterValue[0] && itemValue <= filterValue[1];
+  //             }
+  //             return false;
+  //           }
+
+  //           // Price range filter
+  //           if (Array.isArray(filterValue) && typeof filterValue[1] === 'string') {
+  //             const itemPrice = Math.ceil(Number(item[columnId]));
+  //             return Number.isFinite(itemPrice) &&
+  //                    itemPrice >= Number(filterValue[0]) &&
+  //                    itemPrice <= Number(filterValue[1]);
+  //           }
+
+  //           // String filter
+  //           if (typeof filterValue === 'string') {
+  //             const itemValue = item[columnId]?.toString().toLowerCase();
+  //             return itemValue === filterValue.toLowerCase();
+  //           }
+
+  //           return false;
+  //         });
+  //         return isMatchingItem;
+  //       })
+  //       // Global search
+  //       .filter(item =>
+  //         Object.values(item).some(value =>
+  //           typeof value === 'object'
+  //             ? value &&
+  //               Object.values(value).some(
+  //                 nestedItem =>
+  //                   nestedItem && String(nestedItem).toLowerCase().includes(searchTermLower),
+  //               )
+  //             : value && String(value).toLowerCase().includes(searchTermLower),
+  //         ),
+  //       )
+  //   );
+  // }
 
   function applyFilters() {
     const searchTermLower = searchTerm.toLowerCase();
@@ -134,28 +236,39 @@ export function useTable<T extends AnyObject>(
       sortedData
         .filter(item => {
           const isMatchingItem = Object.entries(filters).some(([columnId, filterValue]) => {
-            if (Array.isArray(filterValue) && typeof filterValue[1] === 'object') {
-              const itemValue = new Date(item[columnId]);
-              return (
-                // @ts-ignore
-                itemValue >= filterValue[0] && itemValue <= filterValue[1]
-              );
+            // Check if the filter value is a date range array
+            if (
+              Array.isArray(filterValue) &&
+              filterValue[0] instanceof Date &&
+              filterValue[1] instanceof Date
+            ) {
+              const itemDate = new Date(item[columnId]); // Convert item value to Date object
+              const startDate = new Date(filterValue[0]);
+              const endDate = new Date(filterValue[1]);
+              endDate.setDate(endDate.getDate() + 1);
+              // Log the dates for debugging
+
+              // Check if item date falls within start and end date (inclusive)
+              return itemDate >= startDate && itemDate <= endDate;
             }
+
+            // If the filter value is a number range (e.g., price)
             if (Array.isArray(filterValue) && typeof filterValue[1] === 'string') {
               const itemPrice = Math.ceil(Number(item[columnId]));
               return itemPrice >= Number(filterValue[0]) && itemPrice <= Number(filterValue[1]);
             }
-            if (isString(filterValue) && !Array.isArray(filterValue)) {
+
+            // Check for string equality (case-insensitive) for text filters
+            if (typeof filterValue === 'string' && !Array.isArray(filterValue)) {
               const itemValue = item[columnId]?.toString().toLowerCase();
-              if (itemValue !== filterValue.toString().toLowerCase()) {
-                return false;
-              }
-              return true;
+              return itemValue === filterValue.toLowerCase();
             }
           });
+
+          // Return whether this item matches any of the filter criteria
           return isMatchingItem;
         })
-        // global search after running filters
+        // Apply global search term filter after individual filters
         .filter(item =>
           Object.values(item).some(value =>
             typeof value === 'object'
@@ -224,6 +337,9 @@ export function useTable<T extends AnyObject>(
       : searchTerm || (sortConfig.key !== null && sortConfig.direction !== null)
         ? searchedData()
         : initialData;
+  // console.log("filteredAndSearchedData",filteredAndSearchedData);
+  // console.log("filters",filters!==filterState);
+
   const tableData = paginatedData(filteredAndSearchedData);
 
   /*

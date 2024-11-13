@@ -46,7 +46,9 @@ export interface DatePickerProps<selectsRange extends boolean | undefined>
 export const DatePicker = ({
   customInput,
   showPopperArrow = false,
-  dateFormat = 'dd/ MM/ yyyy',
+  // dateFormat = 'dd/ MM/ yyyy',
+  dateFormat = 'yyyy-MM-dd',
+
   selectsRange = false,
   onCalendarOpen,
   popperPlacement,

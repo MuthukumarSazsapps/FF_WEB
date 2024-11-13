@@ -10,10 +10,17 @@ export const CustomerFormSchema = z.object({
       message: 'Only letters allowed with single space between words',
     }),
 
+  // CustomerFatherName: z
+  //   .string()
+  //   .min(1, { message: messages.fathernameIsRequired })
+  //   .regex(/^[a-zA-Z]+$/, { message: 'letters Only allowed' }),
   CustomerFatherName: z
     .string()
     .min(1, { message: messages.fathernameIsRequired })
-    .regex(/^[a-zA-Z]+$/, { message: 'letters Only allowed' }),
+    .regex(/^[a-zA-Z][a-zA-Z\s]*$/, {
+      message: 'Only letters and spaces allowed, and it must start with a letter',
+    }),
+
   CustomerDOB: z.coerce.string().optional(),
   CustomerGender: z.string().min(1, { message: messages.genderIsRequired }),
   CustomerAddress: z.string().min(1, { message: messages.addressIsRequired }),

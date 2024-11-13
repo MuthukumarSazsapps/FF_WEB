@@ -17,7 +17,9 @@ type FilterElementProps = {
   handleReset: () => void;
   options: {
     CreatedOn?: boolean;
+    ModifiedOn?: boolean;
     EndDate?: boolean;
+    DueDate?: boolean;
     IsActive?: boolean;
     CityId?: boolean;
     SubscriberCity?: boolean;
@@ -63,11 +65,41 @@ export default function FilterElement({
           startDate={getDateRangeStateValues(filters['CreatedOn'][0])}
           endDate={getDateRangeStateValues(filters['CreatedOn'][1])}
           onChange={(date: any) => {
+            console.log('datem', date);
             updateFilter('CreatedOn', date);
           }}
           placeholderText="Select Created date"
         />
       )}
+      {options.ModifiedOn && (
+        <DateFiled
+          label="Modified Date"
+          selected={getDateRangeStateValues(filters['ModifiedOn'][0])}
+          startDate={getDateRangeStateValues(filters['ModifiedOn'][0])}
+          endDate={getDateRangeStateValues(filters['ModifiedOn'][1])}
+          onChange={(date: any) => {
+            console.log('datem', date);
+
+            updateFilter('ModifiedOn', date);
+          }}
+          placeholderText="Select Modified date"
+        />
+      )}
+      {options.DueDate && (
+        <DateFiled
+          label="DueDate "
+          selected={getDateRangeStateValues(filters['DueDate'][0])}
+          startDate={getDateRangeStateValues(filters['DueDate'][0])}
+          endDate={getDateRangeStateValues(filters['DueDate'][1])}
+          onChange={(date: any) => {
+            console.log('datedue', date);
+
+            updateFilter('DueDate', date);
+          }}
+          placeholderText="Select DueDate date"
+        />
+      )}
+
       {options.EndDate && (
         <DateFiled
           label="End Date"

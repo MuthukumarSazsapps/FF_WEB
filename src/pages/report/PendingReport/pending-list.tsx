@@ -7,11 +7,11 @@ import CommonTable from 'common/table & form/common-table';
 import { getColumns } from './pending-table-column';
 
 export const metadata = {
-  ...metaObject('City Table'),
+  ...metaObject('Pending Report Table'),
 };
 
 const options = {
-  CreatedOn: true,
+  DueDate: true,
   IsActive: true,
 };
 
@@ -49,7 +49,7 @@ export default function PendingListPage() {
             options={options}
             fileName="Pending List"
             header="CUSTOMERID,CUSTOMER NAME
-            ,DUE DATE
+            ,DueDate
             ,DUE AMOUNT
             ,PENDING DUE
             ,DUE.NO,TENURE,LOANTYPE,REGISTER NO,VEHICLENAME,CONTACT,REMARKS,ISACTIVE

@@ -9,6 +9,8 @@ import FilterElement from './filter-element';
 const filterState = {
   CreatedOn: [null, null],
   EndDate: [null, null],
+  ModifiedOn: [null, null],
+  DueDate: [null, null],
   IsActive: '',
   CityId: '',
   CustomerCity: '',

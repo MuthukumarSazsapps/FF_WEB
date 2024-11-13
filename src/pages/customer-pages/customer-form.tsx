@@ -19,6 +19,8 @@ import AvatarUpload from 'common/avatar-upload';
 import Rate from 'common/table & form/rating';
 import { useNavigate } from 'react-router-dom';
 import { ToastErrorMessage, ToastSuccessMessage } from 'common/table & form/toastMessage';
+import UploadZone from 'common/fileupload/upload-zone';
+import ImportFileUploader from 'common/table & form/import-file';
 
 export type renderProbs = (
   control: any,
@@ -580,6 +582,16 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
                         error={errors?.CustomerPhotoURL?.message as string}
                       />
                     </div>
+                    {/* <ImportFileUploader label="Vehicle Document" /> */}
+                    {/* <div className="inline-grid">
+                      <UploadZone
+                        name="portfolios"
+                        getValues={getValues}
+                        label="Proof Document"
+                        setValue={setValue}
+                        // error={errors?.portfolios?.message as string}
+                      />
+                    </div> */}
                   </FormGroup>
                 </div>
                 <FormFooter
