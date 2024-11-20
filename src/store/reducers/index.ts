@@ -19,7 +19,7 @@ import LoanSlice from './loanSlice';
 import DueSlice from './dueSlice';
 import ReportSlice from './reportSlice';
 import PaymentSlice from './paymentSlice';
-
+import EnumMasterSlice from './enumMasterSlice'
 const rootReducer = combineReducers({
   counter: counterSlice.reducer,
   auth: authSlice.reducer,
@@ -41,6 +41,7 @@ const rootReducer = combineReducers({
   dues: DueSlice.reducer,
   report: ReportSlice.reducer,
   payment: PaymentSlice.reducer,
+  EnumMaster:EnumMasterSlice.reducer
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

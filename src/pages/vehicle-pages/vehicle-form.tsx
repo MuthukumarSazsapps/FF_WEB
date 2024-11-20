@@ -6,7 +6,7 @@ import { VehicleFormDefaultValues, VehicleFormSchema, VehicleFormFieldTypes } fr
 import SelectBox from 'common/select';
 import SimpleBar from 'common/simplebar';
 import { useDrawer } from 'hooks/use-drawer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SazsSelect from 'common/table & form/sazs-select';
 import CenterSpinner from 'common/center-spinner';
 import useSelectBoxOptions from 'hooks/use-select-box-options';
@@ -14,16 +14,21 @@ import Input from 'common/input';
 import useVehicles from 'hooks/use-vehicle';
 import { renderProbs } from 'utils/types';
 import { ToastErrorMessage, ToastSuccessMessage } from 'common/table & form/toastMessage';
+import Button from 'common/button';
+import EnumMasterForm from 'pages/enumMaster-form';
+import useEnumMaster from 'hooks/use-enumMaster';
 
 export default function VehicleForm({ data, isEdit = false }: { data?: any; isEdit?: boolean }) {
-  const { handleSubmit, createVehicleState } = useVehicles({ create: true });
+  const { handleSubmit, createVehicleState } = useVehicles({ create: true }); 
   const { handleDelete, deleteVehicleState } = useVehicles({ remove: true });
   const { handleUpdate, updateVehicleState } = useVehicles({ edit: true });
   const { loading } = useVehicles();
+  const {createEnumMasterState } = useEnumMaster();
   const { openDrawer, closeDrawer } = useDrawer();
   const { branchOpt, statusOpt, vehicleOpt, wheelOpt, brandOpt } = useSelectBoxOptions({
     PageName: 'VehicleForm',
   });
+  const [modalState, setModalState] = useState(false);
 
   useEffect(() => {
     if (createVehicleState?.includes('Successfully')) {
@@ -44,7 +49,7 @@ export default function VehicleForm({ data, isEdit = false }: { data?: any; isEd
       ToastSuccessMessage(deleteVehicleState);
       closeDrawer();
     }
-  }, [createVehicleState, updateVehicleState, deleteVehicleState]);
+  }, [createVehicleState, updateVehicleState, deleteVehicleState,createEnumMasterState]);
 
   const onSubmit: SubmitHandler<VehicleFormFieldTypes> = obj => {
     if (data) {
@@ -89,7 +94,7 @@ export default function VehicleForm({ data, isEdit = false }: { data?: any; isEd
           name="Brand"
           render={({ field: { onChange } }) => (
             <SazsSelect
-              label="Brand Name"
+              label="Brand Type"
               options={brandOpt}
               onChange={value => {
                 setValue('Brand', value.value);
@@ -109,7 +114,7 @@ export default function VehicleForm({ data, isEdit = false }: { data?: any; isEd
           name="WheelBase"
           render={({ field: { value, onChange } }) => (
             <SelectBox
-              label="WheelBase"
+              label="Wheel Type"
               placeholder="Select WheelBase"
               options={wheelOpt}
               onChange={onChange}
@@ -187,6 +192,14 @@ export default function VehicleForm({ data, isEdit = false }: { data?: any; isEd
 
   return (
     <SimpleBar className="h-[calc(93%)]">
+      <Button
+        label="Add"
+        onClick={()=>setModalState(true)}
+        type="button"
+        className='w-20 flex items-center p-3 mx-4 my-5'
+      />
+      {modalState==true&&<EnumMasterForm modalState={modalState} setModalState={(value)=>setModalState(value)}/>}
+
       <div className="px-5">
         <Form<VehicleFormFieldTypes>
           validationSchema={VehicleFormSchema}

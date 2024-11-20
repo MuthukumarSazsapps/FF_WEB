@@ -19,7 +19,7 @@ import loansaga from './loan';
 import duesaga from './due';
 import reportSaga from './report';
 import paymentsaga from './payments';
-
+import enumMastersaga from './enumMaster';
 function* rootSaga() {
   yield all([
     fork(counterSaga),
@@ -42,6 +42,7 @@ function* rootSaga() {
     fork(duesaga),
     fork(reportSaga),
     fork(paymentsaga),
+    fork(enumMastersaga)
   ]);
 }
 

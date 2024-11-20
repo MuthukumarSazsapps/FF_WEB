@@ -22,6 +22,7 @@ import LedgerSlice from './reducers/ledgerSlice';
 import DueSlice from './reducers/dueSlice';
 import ReportSlice from './reducers/reportSlice';
 import PaymentSlice from './reducers/paymentSlice';
+import EnumMasterSlice from './reducers/enumMasterSlice';
 
 const createSagaMiddleware = require('redux-saga').default;
 
@@ -59,4 +60,5 @@ export const actions = {
   ...DueSlice.actions,
   ...ReportSlice.actions,
   ...PaymentSlice.actions,
+  ...EnumMasterSlice.actions
 };

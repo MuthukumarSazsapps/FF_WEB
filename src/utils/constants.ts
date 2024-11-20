@@ -1,3 +1,5 @@
+import { Label } from "@headlessui/react/dist/components/label/label";
+
 const SUBSCRIBERS = '/subscribers';
 const USERS = '/users';
 const USERINFO = '/userinfo';
@@ -38,6 +40,7 @@ const LOGS = '/logs';
 const DAYBOOK = '/day-report';
 const GETT = '/get';
 const DISBURSE = '/disburse';
+const EnumMaster='/enumMaster'
 
 export const APIRoutes = {
   //reportss---------------
@@ -130,4 +133,55 @@ export const APIRoutes = {
   preclosecal: LOAN + PRECLOSECAL,
   preclose: LOAN + PRECLOSE,
   loanDisburse: LOAN + DISBURSE,
+  enumMasterCreate:EnumMaster+CREATE
 };
+
+
+// export const EnumMaster={
+//   genderType:'Gender Type',
+//   vehicleType:'Vehicle Type',
+//   wheelType:'WheelType',
+//   brandType:"Brand Type",
+//   loanType:'loan Type',
+//   ledgerGroupType:'Ledger Group Type',
+//   ledgerType:'Ledger Type',
+//   paymentType:'Payment Type',
+// }
+
+
+export const EnumMasterr=
+[
+  {
+    name:'Gender Type',
+    value:'GenderFlags'
+  },
+  {
+    name:'Vehicle Type',
+    value:'VehicleFlags'
+  },
+  {
+    name:'Wheel Type',
+    value:'WheelFlags'
+  },
+  {
+    name:'Brand Type',
+    value:'BrandFlags'
+  },
+  {
+    name:'Ledger Group Type',
+    value:'LedgerGroupFlags'
+  },
+  {
+    name:'Payment Type',
+    value:'PaymentTypeFlags'
+  },
+  {
+    name:'Ledger Type',
+    value:'LedgerTypeFlags'
+  },
+  {
+    name:'Loan Type',
+    value:'LoanTypeFlags'
+  }
+ 
+]

@@ -8,11 +8,15 @@ import RingBellSolidIcon from '../components/icons/ring-bell-solid';
 import ChatSolidIcon from '../components/icons/chat-solid';
 import Button from 'common/button';
 import { Link } from 'react-router-dom';
+import useLocalData from 'hooks/use-localData';
 
 export default function HeaderMenuRight() {
+  const {role}=useLocalData()
   return (
     // <div className="ms-auto grid shrink-0 grid-cols-4 items-center gap-2 text-gray-700 xs:gap-3 xl:gap-4">
     <div className="ms-auto flex shrink-0 grid-cols-4 items-center gap-2 text-gray-700 xs:gap-3 xl:gap-4">
+      {role!=="Admin"?
+      (
       <Link to="/customer/report">
         <Button
           label="₹ Pay Due"
@@ -22,6 +26,7 @@ export default function HeaderMenuRight() {
           // onClick={() => ()}
         />
       </Link>
+      ):null}
       <MessagesDropdown>
         <ActionIcon
           aria-label="Messages"

@@ -25,3 +25,4 @@ export * from './preclose.schema';
 export * from './loan_preclose.schema';
 export * from './payments.schema';
 export * from './doc.schema';
+export * from './enumMaster.schema'

@@ -17,6 +17,7 @@ import loan from './loan';
 import due from './due';
 import report from './report';
 import payments from './payments';
+import enumMaster from './enumMaster';
 export default {
   auth,
   subscriber,
@@ -37,4 +38,5 @@ export default {
   payments,
   due,
   report,
+  enumMaster
 };
