@@ -5,7 +5,6 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { EnumMasterFormFieldTypes } from 'utils/types';
 import EnumMasterSlice from 'store/reducers/enumMasterSlice';
 
-
 function* createVehiclesaga(
   action: PayloadAction<{ EnumMasterData: EnumMasterFormFieldTypes }>,
 ): Generator<Effect, void, unknown> {
@@ -21,7 +20,6 @@ function* createVehiclesaga(
     yield put(EnumMasterSlice.actions.createEnumMasterFailed(messages.listMenuSagaFailed));
   }
 }
-
 
 export default function* enumMastersaga() {
   yield takeEvery(EnumMasterSlice.actions.createEnumMasterRequest, createVehiclesaga);

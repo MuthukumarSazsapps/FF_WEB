@@ -42,7 +42,7 @@ function* rootSaga() {
     fork(duesaga),
     fork(reportSaga),
     fork(paymentsaga),
-    fork(enumMastersaga)
+    fork(enumMastersaga),
   ]);
 }
 

@@ -6,11 +6,9 @@ import { EnumMaster, EnumMasterFormFieldTypes } from 'utils/types';
 import useLocalData from './use-localData';
 
 type UseVehicleReturn = {
- 
   loading?: boolean;
   createEnumMasterState?: string;
   handleSubmit: (data: EnumMasterFormFieldTypes) => void;
-  
 };
 interface APIFlags {
   create?: boolean;
@@ -21,9 +19,10 @@ const defaultAPIFlags: APIFlags = {
 };
 
 const useEnumMaster = (apiFlags = defaultAPIFlags): UseVehicleReturn => {
-  
-  const createLoading = useSelector<RootState, boolean>(state => state.EnumMaster.createAPI.loading);
-  
+  const createLoading = useSelector<RootState, boolean>(
+    state => state.EnumMaster.createAPI.loading,
+  );
+
   const loading = createLoading;
   const createEnumMasterState = useSelector<RootState, string>(
     state => state.EnumMaster.createAPI.success || '',
@@ -31,18 +30,17 @@ const useEnumMaster = (apiFlags = defaultAPIFlags): UseVehicleReturn => {
 
   const { subscriber, branch, username } = useLocalData();
 
-//   useEffect(() => {
-//     if (apiFlags.list && subscriber) {
-//       dispatch(
-//         actions.listVehiclesRequest({
-//           SubscriberId: subscriber,
-//           BranchId: branch,
-//         }),
-//       );
-//     }
-//   }, [createEnumMasterState, subscriber]);
+  //   useEffect(() => {
+  //     if (apiFlags.list && subscriber) {
+  //       dispatch(
+  //         actions.listVehiclesRequest({
+  //           SubscriberId: subscriber,
+  //           BranchId: branch,
+  //         }),
+  //       );
+  //     }
+  //   }, [createEnumMasterState, subscriber]);
   const handleSubmit = (formData: EnumMasterFormFieldTypes) => {
-
     if (apiFlags.create) {
       dispatch(
         actions.createEnumMasterRequest({
@@ -50,7 +48,7 @@ const useEnumMaster = (apiFlags = defaultAPIFlags): UseVehicleReturn => {
             ...formData,
             CreatedBy: username,
             SubscriberId: subscriber,
-            BranchId:branch
+            BranchId: branch,
           },
         }),
       );
@@ -64,15 +62,13 @@ const useEnumMaster = (apiFlags = defaultAPIFlags): UseVehicleReturn => {
       }, 500);
     }
   }, [createEnumMasterState]);
- 
+
   return {
-    
     loading,
-    
+
     createEnumMasterState,
-   
+
     handleSubmit,
-   
   };
 };
 

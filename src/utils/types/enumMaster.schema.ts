@@ -14,8 +14,5 @@ export interface EnumMaster extends EnumMasterFormFieldTypes {
 
 export const EnumMasterFormDefaultValues = {
   FlagType: '',
-  TypeName: ''
+  TypeName: '',
 };
-
-
-

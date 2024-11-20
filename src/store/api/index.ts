@@ -38,5 +38,5 @@ export default {
   payments,
   due,
   report,
-  enumMaster
+  enumMaster,
 };

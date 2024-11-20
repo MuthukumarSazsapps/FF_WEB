@@ -60,5 +60,5 @@ export const actions = {
   ...DueSlice.actions,
   ...ReportSlice.actions,
   ...PaymentSlice.actions,
-  ...EnumMasterSlice.actions
+  ...EnumMasterSlice.actions,
 };

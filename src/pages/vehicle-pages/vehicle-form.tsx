@@ -19,11 +19,11 @@ import EnumMasterForm from 'pages/enumMaster-form';
 import useEnumMaster from 'hooks/use-enumMaster';
 
 export default function VehicleForm({ data, isEdit = false }: { data?: any; isEdit?: boolean }) {
-  const { handleSubmit, createVehicleState } = useVehicles({ create: true }); 
+  const { handleSubmit, createVehicleState } = useVehicles({ create: true });
   const { handleDelete, deleteVehicleState } = useVehicles({ remove: true });
   const { handleUpdate, updateVehicleState } = useVehicles({ edit: true });
   const { loading } = useVehicles();
-  const {createEnumMasterState } = useEnumMaster();
+  const { createEnumMasterState } = useEnumMaster();
   const { openDrawer, closeDrawer } = useDrawer();
   const { branchOpt, statusOpt, vehicleOpt, wheelOpt, brandOpt } = useSelectBoxOptions({
     PageName: 'VehicleForm',
@@ -49,7 +49,7 @@ export default function VehicleForm({ data, isEdit = false }: { data?: any; isEd
       ToastSuccessMessage(deleteVehicleState);
       closeDrawer();
     }
-  }, [createVehicleState, updateVehicleState, deleteVehicleState,createEnumMasterState]);
+  }, [createVehicleState, updateVehicleState, deleteVehicleState, createEnumMasterState]);
 
   const onSubmit: SubmitHandler<VehicleFormFieldTypes> = obj => {
     if (data) {
@@ -194,11 +194,13 @@ export default function VehicleForm({ data, isEdit = false }: { data?: any; isEd
     <SimpleBar className="h-[calc(93%)]">
       <Button
         label="Add"
-        onClick={()=>setModalState(true)}
+        onClick={() => setModalState(true)}
         type="button"
-        className='w-20 flex items-center p-3 mx-4 my-5'
+        className="w-20 flex items-center p-3 mx-4 my-5"
       />
-      {modalState==true&&<EnumMasterForm modalState={modalState} setModalState={(value)=>setModalState(value)}/>}
+      {modalState == true && (
+        <EnumMasterForm modalState={modalState} setModalState={value => setModalState(value)} />
+      )}
 
       <div className="px-5">
         <Form<VehicleFormFieldTypes>

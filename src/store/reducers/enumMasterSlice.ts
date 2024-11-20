@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { APILoaderInformation, EnumMaster,EnumMasterFormDefaultValues } from 'utils/types';
+import { APILoaderInformation, EnumMaster, EnumMasterFormDefaultValues } from 'utils/types';
 
 interface EnumMasterControl {
-  
-    EnumMaster: EnumMaster;
+  EnumMaster: EnumMaster;
   createAPI: APILoaderInformation;
 }
 
 const initialState: EnumMasterControl = {
-    EnumMaster: EnumMasterFormDefaultValues,
+  EnumMaster: EnumMasterFormDefaultValues,
   createAPI: { loading: false, success: '', error: '' },
 };
 
