@@ -20,7 +20,7 @@ export const LoanFormSchema = z
     Endosement: z.boolean(),
     OtherDocument: z.boolean(),
     LoanAmount: z.coerce.number().min(1, { message: messages.LoanAmountRequired }),
-    Interest: z.coerce.number().min(1, { message: messages.InterestRequired }),
+    Interest: z.coerce.number().min(0, { message: messages.InterestRequired }),
     Tenure: z.coerce.number().min(1, { message: messages.TenureRequired }),
     CalculatedEmiAmount: z.coerce.number(),
     ActualEmiAmount: z.coerce.number().min(1, { message: messages.EmiAmountRequired }),
