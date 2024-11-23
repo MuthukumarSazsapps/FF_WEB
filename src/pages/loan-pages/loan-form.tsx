@@ -767,7 +767,7 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
             }, [branchOpt, loanType]);
             useEffect(() => {
               if (emiCall?.Interest) {
-                setValue('InterestAmount', Math.round(emiCall?.Interest));
+                setValue('InterestAmount', Math.ceil(emiCall?.Interest));
               }
             }, [emiCall]);
 

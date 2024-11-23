@@ -43,27 +43,6 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     render: (_: string, row: Location, index: number) => <span>{index + 1}</span>,
   },
   {
-    title: <HeaderCell title="Customer Name" />,
-    dataIndex: 'CustomerName',
-    key: 'CustomerName',
-    width: 130,
-    render: (value: string, row: any) => (
-      <div className="flex items-center">
-        <p>{value}</p>
-        <UpdateDrawer title="Update Pending Remarks" customSize="540px">
-          <PendingForm data={row} />
-        </UpdateDrawer>
-      </div>
-    ),
-  },
-  {
-    title: <HeaderCell title="CustomerId" />,
-    dataIndex: 'CustomerId',
-    key: 'CustomerId',
-    width: 200,
-    render: (value: string) => value,
-  },
-  {
     title: (
       <HeaderCell
         title="Due Date"
@@ -78,6 +57,28 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     width: 250,
     render: (value: Date) => (value ? <DateCell date={value} time={false} /> : '----'),
   },
+  {
+    title: <HeaderCell title="CustomerId" />,
+    dataIndex: 'CustomerId',
+    key: 'CustomerId',
+    width: 200,
+    render: (value: string) => value,
+  },
+  {
+    title: <HeaderCell title="Customer Name" />,
+    dataIndex: 'CustomerName',
+    key: 'CustomerName',
+    width: 130,
+    render: (value: string, row: any) => (
+      <div className="flex items-center">
+        <p>{value}</p>
+        <UpdateDrawer title="Update Pending Remarks" customSize="540px">
+          <PendingForm data={row} />
+        </UpdateDrawer>
+      </div>
+    ),
+  },
+
   {
     title: <HeaderCell title="Due Amount" width={200} />,
     dataIndex: 'EmiAmount',
@@ -106,14 +107,6 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     width: 150,
     render: (value: Number) => value,
   },
-
-  {
-    title: <HeaderCell title="LoanType" />,
-    dataIndex: 'LoanType',
-    key: 'LoanType',
-    width: 200,
-    render: (value: string) => value,
-  },
   {
     title: <HeaderCell title="Register No" />,
     dataIndex: 'RegNumber',
@@ -121,6 +114,14 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     width: 200,
     render: (value: string) => value ?? '---',
   },
+  // {
+  //   title: <HeaderCell title="LoanType" />,
+  //   dataIndex: 'LoanType',
+  //   key: 'LoanType',
+  //   width: 200,
+  //   render: (value: string) => value,
+  // },
+
   {
     title: <HeaderCell title="VehicleName" />,
     dataIndex: 'VehicleName',
@@ -128,14 +129,6 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     width: 200,
     render: (value: string) => value ?? '----',
   },
-  // {
-  //   title: <HeaderCell title="Contact" />,
-  //   dataIndex: 'Contact',
-  //   key: 'Contact',
-  //   width: 300,
-  //   render: (value: string, row: any) =>
-  //     row.Contact2 ? row.Contact1 + ','+ row.Contact2 : row.Contact1,
-  // },
   {
     title: <HeaderCell title="Contact" />,
     dataIndex: 'Contact',
