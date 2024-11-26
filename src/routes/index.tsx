@@ -42,6 +42,7 @@ import DaybookPage from 'pages/day-book/daybook';
 import SubLogsListPage from 'pages/logs-page/sub-logs-list';
 import DefaultListPage from 'pages/report/DefaultReport/default-list';
 import PaymentsForm from 'pages/payments/payments-form';
+import PendingCapitalListPage from 'pages/report/PendingCapitalReport/pendingCapital-list';
 
 interface UserRouteValidatorProps {
   children: ReactNode;
@@ -194,6 +195,14 @@ const MainRouter: React.FC = () => {
               element={
                 <UserRouteValidator>
                   <DefaultListPage />
+                </UserRouteValidator>
+              }
+            />
+            <Route
+              path={'/report/PendingCapital'}
+              element={
+                <UserRouteValidator>
+                  <PendingCapitalListPage />
                 </UserRouteValidator>
               }
             />

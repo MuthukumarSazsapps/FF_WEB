@@ -168,4 +168,43 @@ const PdfPreview = ({ data, className, header, filters, fileName }: Previewtype)
   );
 };
 
+// const PdfPreview = ({ data, className, header, filters, fileName }: Previewtype) => {
+//   const { closeModal } = useModal();
+//   const { loginUser } = useUsers();
+//   const [orientation, setOrientation] = useState('portrait');
+//   const [paperSize, setPaperSize] = useState('A4');
+//   const [margin, setMargin] = useState({ top: 0.5, right: 0.5, bottom: 0.5, left: 0.5 });
+
+//   const handleSubmit = () => {
+//       if (['portrait', 'landscape'].includes(orientation) && ['A4', 'A3', 'A2'].includes(paperSize)) {
+//           exportToPDF(data, header, fileName, loginUser, filters, orientation as 'portrait' | 'landscape', paperSize, margin);
+//           closeModal();
+//       }
+//   };
+
+//   return (
+//       <div className={cn('max-w-full rounded-md p-6', className)}>
+//           <Title as="h4" className="text-medium text-violet-800 font-bold">
+//               Pdf Downloader
+//           </Title>
+//           <div className="flex flex-row mt-2">
+//               <RadioGroup value={orientation} setValue={setOrientation}>
+//                   <Radio label="Portrait" value="portrait" />
+//                   <Radio label="Landscape" value="landscape" />
+//               </RadioGroup>
+//               <SelectBox
+//                   options={[
+//                       { name: 'A4', value: 'A4' },
+//                       { name: 'A3', value: 'A3' },
+//                       { name: 'A2', value: 'A2' },
+//                   ]}
+//                   value={paperSize}
+//                   onChange={setPaperSize}
+//               />
+//           </div>
+//           <Button label="Generate" onClick={handleSubmit} />
+//       </div>
+//   );
+// };
+
 export default PdfPreview;

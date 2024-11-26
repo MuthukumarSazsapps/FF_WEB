@@ -20,6 +20,24 @@ function* pendingListSaga(
   }
 }
 
+function* pendingCapitalListSaga(
+  action: PayloadAction<{ SubscriberId: string; BranchId: string }>,
+): Generator<Effect, void, unknown> {
+  try {
+    const { SubscriberId, BranchId } = action.payload;
+    const response = yield call(api.report.allPendingCapitalList, SubscriberId, BranchId);
+    if (response) {
+      yield put(reportSlice.actions.pendingCapitalListSuccess(response));
+    } else {
+      yield put(
+        reportSlice.actions.pendingCapitalListFailure(messages.pendingCapitalListAPIFailed),
+      );
+    }
+  } catch (error) {
+    yield put(reportSlice.actions.pendingCapitalListFailure(messages.pendingCapitallistSagaFailed));
+  }
+}
+
 function* defaultListSaga(
   action: PayloadAction<{ SubscriberId: string; BranchId: string }>,
 ): Generator<Effect, void, unknown> {
@@ -88,6 +106,7 @@ function* updatePendingDocssaga(
 }
 export default function* reportSaga() {
   yield takeEvery(reportSlice.actions.pendingListRequest, pendingListSaga);
+  yield takeEvery(reportSlice.actions.pendingCaptialListRequest, pendingCapitalListSaga);
   yield takeEvery(reportSlice.actions.defaultListRequest, defaultListSaga);
   yield takeEvery(reportSlice.actions.pendingDocumentsListRequest, pendingDocumentsListSaga);
   yield takeEvery(reportSlice.actions.updatePendingRequest, updatePendingRemarksaga);

@@ -145,6 +145,14 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
         row.Contact1
       ),
   },
+  // {
+  //   title: <HeaderCell title="Contact" />,
+  //   dataIndex: 'Contact',
+  //   key: 'Contact',
+  //   width: 300,
+  //   render: (value: string, row: any) =>{console.log("row",row)}
+
+  // },
   {
     title: <HeaderCell title="Remarks" />,
     dataIndex: 'Remarks',

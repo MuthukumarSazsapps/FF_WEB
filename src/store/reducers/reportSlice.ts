@@ -5,8 +5,10 @@ import { APILoaderInformation } from 'utils/types';
 interface ReportControl {
   list: any;
   pendingDocsList: any;
+  allPendingCapitalList: any;
   defaultlist: any;
   listAPI: APILoaderInformation;
+  pendingCaptialListAPI: APILoaderInformation;
   docsList: APILoaderInformation;
   defaultlistAPI: APILoaderInformation;
   updateAPI: APILoaderInformation;
@@ -15,8 +17,10 @@ interface ReportControl {
 
 const initialState: ReportControl = {
   list: [],
+  allPendingCapitalList: [],
   pendingDocsList: [],
   defaultlist: [],
+  pendingCaptialListAPI: { loading: false, error: '' },
   listAPI: { loading: false, error: '' },
   docsList: { loading: false, error: '' },
   defaultlistAPI: { loading: false, error: '' },
@@ -55,7 +59,18 @@ const ReportSlice = createSlice({
     resetUpdatePendingControl: state => {
       state.updateAPI.success = '';
     },
-
+    //pending Capital list-----------------
+    pendingCaptialListRequest: (state, action) => {
+      state.pendingCaptialListAPI.loading = true;
+    },
+    pendingCapitalListSuccess: (state, action) => {
+      state.pendingCaptialListAPI.loading = false;
+      state.allPendingCapitalList = action.payload;
+    },
+    pendingCapitalListFailure: (state, action) => {
+      state.pendingCaptialListAPI.loading = false;
+      state.pendingCaptialListAPI.error = action.payload;
+    },
     //DocumentList ----------------
     pendingDocumentsListRequest: (state, action) => {
       state.docsList.loading = true;

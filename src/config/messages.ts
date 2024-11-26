@@ -114,6 +114,8 @@ export const messages = {
   //report Messages ---------
   pendingListAPIFailed: 'Pending List Fetching Failed...',
   pendinglistSagaFailed: 'Pending List Fetching Failed...',
+  pendingCapitalListAPIFailed: 'Pending Capital List Fetching Failed...',
+  pendingCapitallistSagaFailed: 'Pending Capital List Fetching Failed...',
 
   //Ledger---------
   ledgerGroupNameRequired: 'Ledger Group Name Required',

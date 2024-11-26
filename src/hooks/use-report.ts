@@ -7,6 +7,7 @@ import useLocalData from './use-localData';
 
 export type UseReportReturn = {
   allPendingList: PendingRemarksFormFieldTypes[]; //or any[]
+  allPendingCapitalList: PendingRemarksFormFieldTypes[];
   loading: boolean;
   // pendingListLoading: boolean;
   handleUpdate: (data: any) => void;
@@ -25,19 +26,32 @@ interface APIFlags {
   update?: boolean;
   docsList?: boolean;
   defaultList?: boolean;
+  pendingCapitalList?: boolean;
 }
 
 const defaultAPIFlags: APIFlags = {
   list: false,
+  update: false,
+  docsList: false,
+  defaultList: false,
+  pendingCapitalList: false,
 };
 
 const usePendingListState = (apiFlags = defaultAPIFlags): UseReportReturn => {
+  console.log(apiFlags.pendingCapitalList, 'kk');
+
   const allPendingList = useSelector<RootState, PendingRemarksFormFieldTypes[]>(
     state => state.report.list,
+  );
+  const allPendingCapitalList = useSelector<RootState, PendingRemarksFormFieldTypes[]>(
+    state => state.report.allPendingCapitalList,
   );
   const listLoading = useSelector<RootState, boolean>(state => state.report.listAPI.loading);
   const defaultListLoading = useSelector<RootState, boolean>(
     state => state.report.defaultlistAPI.loading,
+  );
+  const allPendingCapitalListLoading = useSelector<RootState, boolean>(
+    state => state.report.pendingCaptialListAPI.loading,
   );
 
   const updatePendingRemarks = useSelector<RootState, string>(
@@ -57,7 +71,7 @@ const usePendingListState = (apiFlags = defaultAPIFlags): UseReportReturn => {
   const defaultList = useSelector<RootState, PendingRemarksFormFieldTypes[]>(
     state => state.report.defaultlist,
   );
-  const loading = listLoading || defaultListLoading;
+  const loading = listLoading || defaultListLoading || allPendingCapitalListLoading;
   const { username, subscriber, branch } = useLocalData();
 
   useEffect(() => {
@@ -65,6 +79,12 @@ const usePendingListState = (apiFlags = defaultAPIFlags): UseReportReturn => {
       dispatch(actions.pendingListRequest({ SubscriberId: subscriber, BranchId: branch }));
     }
   }, [updatePendingRemarks]);
+
+  useEffect(() => {
+    if (apiFlags.pendingCapitalList) {
+      dispatch(actions.pendingCaptialListRequest({ SubscriberId: subscriber, BranchId: branch }));
+    }
+  }, [apiFlags.pendingCapitalList]);
 
   useEffect(() => {
     if (apiFlags.docsList) {
@@ -113,6 +133,7 @@ const usePendingListState = (apiFlags = defaultAPIFlags): UseReportReturn => {
   }, [updatePendingDocs]);
   return {
     allPendingList,
+    allPendingCapitalList,
     loading,
     updatePendingDocs,
     docUpdateLoanding,

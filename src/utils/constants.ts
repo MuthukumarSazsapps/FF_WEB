@@ -30,6 +30,7 @@ const DUEENTRY = '/due-entry';
 const DUEDELETE = '/due-delete';
 const REPORT = '/report';
 const PENDING = '/pendingreport';
+const PENDINGCAPITAL = '/pendingCapitalReport';
 const DEFAULT = '/defaultreport';
 const PENDINGDUE = '/pending-dues';
 const PRECLOSECAL = '/preclose/calculation';
@@ -45,6 +46,7 @@ const EnumMaster = '/enumMaster';
 export const APIRoutes = {
   //reportss---------------
   pendingReport: REPORT + PENDING,
+  pendingCapitalReport: REPORT + PENDINGCAPITAL,
   defaultReport: REPORT + DEFAULT,
   documentPendings: REPORT + DOCUMENTS,
   pendingDocsUpdate: REPORT + DOCUPDATE,

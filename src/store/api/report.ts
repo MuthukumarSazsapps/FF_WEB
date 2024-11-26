@@ -12,6 +12,17 @@ const alllistpending = async (SubscriberId: String, BranchId: String) => {
   return response ?? [];
 };
 
+const allPendingCapitalList = async (SubscriberId: String, BranchId: String) => {
+  const response = await axiosInstance
+    .post(APIRoutes.pendingCapitalReport, { SubscriberId, BranchId })
+    .then(result => result.data)
+    .catch(err => {
+      console.log('pending capital list api error', err);
+    });
+
+  return response ?? [];
+};
+
 const alldefaultlist = async (SubscriberId: String, BranchId: String) => {
   const response = await axiosInstance
     .post(APIRoutes.defaultReport, { SubscriberId, BranchId })
@@ -56,6 +67,7 @@ const pendingDocUpdate = async (updateData: any) => {
 };
 export default {
   alllistpending,
+  allPendingCapitalList,
   pendingDocUpdate,
   pendingDocuments,
   updatePendingRemarks,

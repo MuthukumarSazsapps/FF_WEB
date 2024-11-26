@@ -143,6 +143,11 @@ export const SubscriberItems: StaticMenuItem[] = [
         href: '/report/Default',
         badge: 'new',
       },
+      {
+        name: 'Pending Capital Report',
+        href: '/report/PendingCapital',
+        badge: 'new',
+      },
     ],
   },
   {
