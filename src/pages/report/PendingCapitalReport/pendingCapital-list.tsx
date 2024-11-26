@@ -17,7 +17,7 @@ const options = {
 };
 
 const pageHeader = {
-  title: 'Pending Report',
+  title: 'Pending Capital Report',
   breadcrumb: [
     {
       href: '/',
@@ -27,7 +27,7 @@ const pageHeader = {
       name: 'List',
     },
     {
-      name: 'Pending',
+      name: 'Pending Capital',
     },
   ],
 };
@@ -76,7 +76,7 @@ export default function PendingCapitalListPage() {
           <div className="flex justify-end items-center mt-4">
             <span className="mr-4 text-lg font-semibold mt-3">Total Pending Amount :</span>
             <span className="p-2 bg-green-500 text-white text-4xl mt-5 rounded-lg">
-              ₹ {pendingCapitalAmount}
+              ₹ {new Intl.NumberFormat('en-IN').format(pendingCapitalAmount)}
             </span>
           </div>
         </>
