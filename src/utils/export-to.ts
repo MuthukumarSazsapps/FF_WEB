@@ -2,6 +2,7 @@ import { jsPDF } from 'jspdf';
 import * as XLSX from 'xlsx';
 import 'jspdf-autotable';
 import autoTable, { UserOptions, RowInput } from 'jspdf-autotable';
+import dayjs from 'dayjs';
 
 interface UserData {
   [key: string]: string | number | Date;
@@ -228,6 +229,7 @@ export function exportToPDF(
     const contentHeight = doc.internal.pageSize.getHeight() - top - bottom;
 
     // Add Company Logo
+    //const addHeader = (doc: jsPDF, pageNumber?: number) => {
     const logoWidth = 60;
     const logoHeight = 60;
     const centerX = (contentWidth - logoWidth) / 2 + left;
@@ -270,17 +272,33 @@ export function exportToPDF(
       }
     }
     const listByWidth = doc.getStringUnitWidth(listBy) * 10;
-    const listByWidthWidthXCoordinate = doc.internal.pageSize.getWidth() - right - listByWidth;
-    doc.text(listBy, listByWidthWidthXCoordinate, top + 60);
+    const listByWidthXCoordinate = doc.internal.pageSize.getWidth() - right - listByWidth;
+    doc.text(listBy, listByWidthXCoordinate, top + 60);
 
+    const pageNumber = doc.getNumberOfPages();
+    if (pageNumber) {
+      doc.setFontSize(10);
+      doc.setTextColor('black');
+      const PageWidth = doc.getStringUnitWidth(`Page - ${pageNumber}`) * 10;
+      const PageWidthXCoordinate = doc.internal.pageSize.getWidth() - right - PageWidth;
+      doc.text(`Page - ${pageNumber}`, PageWidthXCoordinate, top + 80);
+    }
+    //}
     // Prepare Table Data
     const columns: string[] = Object.keys(data[0]);
+    // const formatDate = (data: any) =>
+    //   data.map((item: any) => ({
+    //     ...item,
+    //     CreatedOn: new Date(item.CreatedOn).toLocaleDateString(),
+    //     ModifiedOn: new Date(item.ModifiedOn).toLocaleDateString(),
+    //     DueDate: new Date(item.DueDate).toLocaleDateString(),
+    //   }));
     const formatDate = (data: any) =>
       data.map((item: any) => ({
         ...item,
-        CreatedOn: new Date(item.CreatedOn).toLocaleDateString(),
-        ModifiedOn: new Date(item.ModifiedOn).toLocaleDateString(),
-        DueDate: new Date(item.DueDate).toLocaleDateString(),
+        CreatedOn: dayjs(item.CreatedOn).format('DD-MM-YYYY'),
+        ModifiedOn: dayjs(item.ModifiedOn).format('DD-MM-YYYY'),
+        DueDate: dayjs(item.DueDate).format('DD-MM-YYYY'),
       }));
     const formattedData = formatDate(data);
     const rows: RowInput[] = formattedData.map((row: any) => Object.values(row));
@@ -305,10 +323,10 @@ export function exportToPDF(
       theme: 'grid',
       styles: {
         fontSize: fontSizeAdjusted,
-        cellPadding: 2,
+        cellPadding: 4, //old 2
       },
       headStyles: {
-        minCellHeight: 20,
+        minCellHeight: 30, //old 20
         valign: 'middle',
         halign: 'center',
         overflow: 'linebreak',
@@ -328,6 +346,11 @@ export function exportToPDF(
       body: rows,
       startY: top + 100,
       tableWidth: columnWidth * columnCount > pageWidth ? 'wrap' : 'auto',
+      // didDrawPage: () => {
+      //   const pageNumber = doc.getNumberOfPages(); // Get the current page number
+      //   addHeader(doc, pageNumber);
+
+      // },
     };
 
     // Dynamically set column width
@@ -344,135 +367,6 @@ export function exportToPDF(
     console.error('Margins not provided!');
   }
 }
-
-// export function exportToPDF(
-//   data: any[],
-//   header: string,
-//   fileName: string,
-//   loginUser: any,
-//   filters: any,
-//   orientation: 'p' | 'portrait' | 'l' | 'landscape',
-//   size: string,
-//   margin: { top: number; right: number; bottom: number; left: number } = { top: 50, right: 50, bottom: 50, left: 100 }
-// ) {
-//   const doc = new jsPDF(orientation, 'pt', size);
-
-//   const { top, right, bottom, left } = margin;
-
-//   // Content Area Dimensions
-//   const contentWidth = doc.internal.pageSize.getWidth() - left - right;
-//   const contentHeight = doc.internal.pageSize.getHeight() - top - bottom;
-
-//   // Add Company Logo
-//   const logoWidth = 60;
-//   const logoHeight = 60;
-//   const centerX = contentWidth / 2 + left - logoWidth / 2;
-//   doc.addImage(
-//     require('../images/sazsgrey.png'),
-//     'jpeg',
-//     centerX,
-//     top,
-//     logoWidth,
-//     logoHeight
-//   );
-
-//   // Add Header Information
-//   doc.setFontSize(18);
-//   doc.text(loginUser.CompanyName || 'Admin', left+50, top + 30);
-
-//   doc.setFontSize(10);
-//   doc.setTextColor('gray');
-//   doc.text(loginUser.Address1 || '', left+50, top + 50);
-//   doc.text('City, State, ZIP', left+50, top + 65);
-//   doc.text(loginUser.MobileNo || '', left+50, top + 80);
-
-//   // Add File Name and Current Date
-//   const currentDate = new Date().toLocaleDateString('en-US', {
-//     year: 'numeric',
-//     month: '2-digit',
-//     day: '2-digit',
-//   });
-//   doc.text(fileName, contentWidth + left - 100, top + 30);
-//   doc.text(currentDate, contentWidth + left - 100, top + 50);
-
-//   // Add Filters
-//   let listBy = '';
-//   if (filters.filters) {
-//     if (filters.filters.CreatedOn[0] && filters.filters.CreatedOn[1]) {
-//       const startDate = new Date(filters.filters.CreatedOn[0]).toLocaleDateString();
-//       const endDate = new Date(filters.filters.CreatedOn[1]).toLocaleDateString();
-//       listBy = `From: ${startDate} to ${endDate}`;
-//     } else if (filters.filters.IsActive) {
-//       listBy = `${filters.filters.IsActive ? 'Active List' : 'Inactive List'}`;
-//     } else {
-//       listBy = 'All List';
-//     }
-//   }
-//   doc.text(listBy, contentWidth + left - 100, top + 70);
-
-//   // Prepare Table Data
-//   const columns: string[] = Object.keys(data[0]);
-//   const formatDate = (data: any) =>
-//     data.map((item: any) => ({
-//       ...item,
-//       CreatedOn: new Date(item.CreatedOn).toLocaleDateString(),
-//       ModifiedOn: new Date(item.ModifiedOn).toLocaleDateString(),
-//     }));
-//   const formattedData = formatDate(data);
-//   const rows: RowInput[] = formattedData.map((row: any) => Object.values(row));
-
-//   // Dynamic Table Configuration
-//   const columnCount = columns.length;
-//   const maxColumnWidth = 80;
-//   const minColumnWidth = 20;
-
-//   // Calculate column width dynamically
-//   const columnWidth =
-//     columnCount * maxColumnWidth > contentWidth
-//       ? Math.max(minColumnWidth, contentWidth / columnCount)
-//       : maxColumnWidth;
-
-//   // Adjust font size based on column count
-//   const fontSizeAdjusted = Math.max(7, Math.min(12, 500 / (columnCount * 5)));
-
-//   const options: UserOptions = {
-//     margin: { top: top + 150 },
-//     styles: {
-//       fontSize: fontSizeAdjusted,
-//       cellPadding: 2,
-//     },
-//     headStyles: {
-//       minCellHeight: 20,
-//       valign: 'middle',
-//       overflow: 'linebreak',
-//       fillColor: [41, 128, 185],
-//       textColor: [255, 255, 255],
-//       fontSize: fontSizeAdjusted,
-//     },
-//     bodyStyles: {
-//       textColor: [0, 0, 0],
-//       valign: 'middle',
-//       overflow: 'linebreak',
-//       fontSize: fontSizeAdjusted,
-//     },
-//     columnStyles: {},
-//     head: [columns],
-//     body: rows,
-//     startY: top + 100,
-//     tableWidth: columnWidth * columnCount > contentWidth ? 'wrap' : 'auto',
-//   };
-
-//   // Dynamically set column width
-//   columns.forEach((column, index) => {
-//     options.columnStyles![index.toString()] = { cellWidth: columnWidth };
-//   });
-
-//   // Render the Table
-//   autoTable(doc, options);
-
-//   // Save the PDF
-//   doc.save(`${fileName}.pdf`);
-// }
 
 export function exportToExcel(data: any[], fileName: string) {
   const worksheet = XLSX.utils.json_to_sheet(data);

@@ -567,7 +567,7 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
                 selected={value}
                 dateFormat={'d MMM yyyy'}
                 inputProps={{
-                  label: 'Loan Start Date',
+                  label: 'Due Start Date',
                 }}
                 required
               />
