@@ -26,10 +26,10 @@ const PdfPreview = ({ data, className, header, filters, fileName }: Previewtype)
   const [value1, setValue1] = useState('portrait');
   const [value2, setValue2] = useState('A4');
   const [margin, setMargin] = useState({
-    top: 0.5,
-    right: 0.5,
-    bottom: 0.5,
-    left: 0.5,
+    top: 10,
+    right: 10,
+    bottom: 10,
+    left: 10,
   });
 
   const paperSize = [

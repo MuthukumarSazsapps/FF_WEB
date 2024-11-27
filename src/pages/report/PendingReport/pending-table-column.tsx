@@ -54,21 +54,21 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     onHeaderCell: () => onHeaderCellClick('DueDate'),
     dataIndex: 'DueDate',
     key: 'DueDate',
-    width: 250,
+    // width: 250,
     render: (value: Date) => (value ? <DateCell date={value} time={false} /> : '----'),
   },
   {
     title: <HeaderCell title="CustomerId" />,
     dataIndex: 'CustomerId',
     key: 'CustomerId',
-    width: 200,
+    // width: 200,
     render: (value: string) => value,
   },
   {
     title: <HeaderCell title="Customer Name" />,
     dataIndex: 'CustomerName',
     key: 'CustomerName',
-    width: 130,
+    // width: 130,
     render: (value: string, row: any) => (
       <div className="flex items-center">
         <p>{value}</p>
@@ -83,81 +83,66 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     title: <HeaderCell title="Due Amount" width={200} />,
     dataIndex: 'EmiAmount',
     key: 'EmiAmount',
-    width: 200,
+    // width: 200,
     render: (value: Number) => '₹ ' + value,
   },
   {
     title: <HeaderCell title="Pending Due" />,
     dataIndex: 'P.Due',
     key: 'P.Due',
-    width: 150,
+    // width: 150,
     render: (value: Number) => value,
   },
   {
     title: <HeaderCell title="Due.No" />,
     dataIndex: 'CurrentDue',
     key: 'CurrentDue',
-    width: 250,
+    // width: 250,
     render: (value: Number) => value,
   },
   {
     title: <HeaderCell title="Tenure" />,
     dataIndex: 'Tenure',
     key: 'Tenure',
-    width: 150,
+    // width: 150,
     render: (value: Number) => value,
   },
   {
     title: <HeaderCell title="Register No" />,
     dataIndex: 'RegNumber',
     key: 'RegNumber',
-    width: 200,
+    // width: 200,
     render: (value: string) => value ?? '---',
   },
-  // {
-  //   title: <HeaderCell title="LoanType" />,
-  //   dataIndex: 'LoanType',
-  //   key: 'LoanType',
-  //   width: 200,
-  //   render: (value: string) => value,
-  // },
-
   {
     title: <HeaderCell title="VehicleName" />,
     dataIndex: 'VehicleName',
     key: 'VehicleName',
-    width: 200,
+    // width: 200,
     render: (value: string) => value ?? '----',
   },
   {
     title: <HeaderCell title="Contact" />,
     dataIndex: 'Contact',
     key: 'Contact',
-    width: 300,
-    render: (value: string, row: any) =>
-      row.Contact2 ? (
-        <>
-          {row.Contact1}
-          <br />
-          {row.Contact2}
-        </>
-      ) : (
-        row.Contact1
-      ),
+    // width: 300,
+    render: (value: string, row: any) => value,
+    // row.Contact2 ? (
+    //   <>
+    //     {row.Contact1}
+    //     <br />
+    //     {row.Contact2}
+    //   </>
+    // ) : (
+    //   row.Contact1
+    // ),
   },
-  // {
-  //   title: <HeaderCell title="Contact" />,
-  //   dataIndex: 'Contact',
-  //   key: 'Contact',
-  //   width: 300,
-  //   render: (value: string, row: any) =>{console.log("row",row)}
 
-  // },
   {
     title: <HeaderCell title="Remarks" />,
     dataIndex: 'Remarks',
     key: 'Remarks',
-    width: 200,
+    // width: 200,
     render: (value: string) => value ?? '---',
   },
   {
@@ -170,9 +155,10 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
       />
     ),
     onHeaderCell: () => onHeaderCellClick('ModifiedOn'),
-    dataIndex: 'ModifiedOn',
+    dataIndex: 'Modified Date',
     key: 'ModifiedOn',
-    width: 200,
-    render: (value: Date) => (value ? <DateCell date={value} /> : '----'),
+    // width: 200,
+    render: (value: Date, row: any) =>
+      row.ModifiedOn ? <DateCell date={row.ModifiedOn} /> : '----',
   },
 ];
