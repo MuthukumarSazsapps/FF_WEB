@@ -134,6 +134,10 @@ export default function CustomerReportPage() {
                 <p>{customerInfo.CustomerName}</p>
               </div>
               <div className="flex gap-3">
+                <p className="w-1/3 font-bold">Father Name</p>
+                <p>{customerInfo.CustomerFatherName}</p>
+              </div>
+              <div className="flex gap-3">
                 <p className="w-1/3 font-bold">PhoneNo</p>
                 <p>{customerInfo.CustomerPhoneNo}</p>
               </div>
@@ -198,8 +202,8 @@ export default function CustomerReportPage() {
                   <p>{loanInfo.DocumentCharges || 'NA'}</p>
                 </div>
                 <div className="flex gap-3">
-                  <p className="w-2/4 font-bold">LoanStartDate</p>
-                  <p>{new Date(loanInfo.LoanStartDate).toLocaleDateString('en-GB')}</p>
+                  <p className="w-2/4 font-bold">Loan Opening Date</p>
+                  <p>{new Date(loanInfo.CreatedOn).toLocaleDateString('en-GB')}</p>
                 </div>
                 <div className="flex gap-3">
                   <p className="w-2/4 font-bold">Interest</p>

@@ -47,7 +47,7 @@ export default function DefaultListPage() {
             getColumns={getColumns}
             scrollx={1700}
             options={options}
-            fileName="Pending List"
+            fileName="Default List"
             header="CUSTOMERID,CUSTOMER NAME
             ,DUE DATE
             ,DUE AMOUNT

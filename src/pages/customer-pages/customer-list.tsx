@@ -63,7 +63,7 @@ export default function CustomerListPage() {
           getColumns={getColumns}
           scrollx={1800}
           options={options}
-          fileName="Customers"
+          fileName="Customers List"
           header="Id,SubscriberName,ShortName,NoOfBranches,Email,MobileNo,UserName,LandLineNo,Address1,Address2,LandMark,GstNo,CityId,IsActive,PointOfContact,CreatedOn,StartDate,EndDate"
           data={allCustomers}
         />

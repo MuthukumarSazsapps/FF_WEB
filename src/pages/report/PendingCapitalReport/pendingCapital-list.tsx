@@ -63,7 +63,7 @@ export default function PendingCapitalListPage() {
               getColumns={getColumns}
               scrollx={1500}
               options={options}
-              fileName="Pending List"
+              fileName="Pending Capital List"
               header="CUSTOMERID,CUSTOMER NAME
             ,DueDate
             ,DUE AMOUNT

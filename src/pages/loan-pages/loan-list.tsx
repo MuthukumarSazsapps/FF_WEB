@@ -62,7 +62,7 @@ export default function LoanListPage() {
             getColumns={getColumns}
             options={options}
             scrollx={2200}
-            fileName="Loans"
+            fileName="Loan List"
             header="NO,CustomerName,ShortName,NoOfBranches,Email,MobileNo,UserName,LandLineNo,Address1,Address2,LandMark,GstNo,CityId,IsActive,PointOfContact,CreatedOn,StartDate,EndDate"
             data={allLoans}
           />
