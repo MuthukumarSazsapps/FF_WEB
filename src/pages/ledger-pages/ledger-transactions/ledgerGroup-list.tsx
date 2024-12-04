@@ -8,7 +8,7 @@ import DrawerButton from 'common/drawer-button';
 import LedgerForm from './ledger-form';
 import LedgerGroupForm from './ledgerGroup-form';
 import CommonTable from 'common/table & form/common-table';
-import { getColumns } from './ledgerGroup-table-columns';
+import { getColumns } from './ledgerTransaction-table-columns';
 
 export const metadata = {
   ...metaObject('City Table'),
@@ -20,22 +20,22 @@ const options = {
 };
 
 const pageHeader = {
-  title: 'Ledger List',
+  title: 'Ledger Transactions',
   breadcrumb: [
     {
       href: '/',
       name: 'Home',
     },
     {
-      name: 'List',
+      name: 'Ledger',
     },
     {
-      name: 'Ledger',
+      name: 'Transactions',
     },
   ],
 };
 
-export default function LedgerListPage() {
+export default function LedgerTransactionPage() {
   const { allLedger, listLedgerLoading } = useLedger({ list: true });
   const { allLedgerGroup, listLoading } = useLedgerGroup({ list: true });
 
@@ -46,14 +46,7 @@ export default function LedgerListPage() {
   return (
     <>
       <div className="pdfd">
-        <TableLayout title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}>
-          <DrawerButton title="Create Ledger" customSize="540px">
-            <LedgerForm />
-          </DrawerButton>
-          <DrawerButton title="Ledger Group" customSize="540px">
-            <LedgerGroupForm />
-          </DrawerButton>
-        </TableLayout>
+        <TableLayout title={pageHeader.title} breadcrumb={pageHeader.breadcrumb}></TableLayout>
         {allLedger.length > 0 ? (
           <CommonTable
             getColumns={getColumns}
@@ -61,7 +54,7 @@ export default function LedgerListPage() {
             options={options}
             fileName="Ledger_List"
             header="Type,LedgerId,LedgerName,CreatedBy,CreatedOn,ModifiedBy,ModifiedOn,IsActive"
-            data={allLedger[0]}
+            data={allLedger[1]}
           />
         ) : (
           <WelcomePage />

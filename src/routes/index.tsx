@@ -43,6 +43,7 @@ import SubLogsListPage from 'pages/logs-page/sub-logs-list';
 import DefaultListPage from 'pages/report/DefaultReport/default-list';
 import PaymentsForm from 'pages/payments/payments-form';
 import PendingCapitalListPage from 'pages/report/PendingCapitalReport/pendingCapital-list';
+import LedgerTransactionPage from 'pages/ledger-pages/ledger-transactions/ledgerGroup-list';
 
 interface UserRouteValidatorProps {
   children: ReactNode;
@@ -147,6 +148,14 @@ const MainRouter: React.FC = () => {
               element={
                 <UserRouteValidator>
                   <LedgerListPage />
+                </UserRouteValidator>
+              }
+            />
+            <Route
+              path={'/Ledger/transaction'}
+              element={
+                <UserRouteValidator>
+                  <LedgerTransactionPage />
                 </UserRouteValidator>
               }
             />

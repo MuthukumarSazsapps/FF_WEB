@@ -113,10 +113,27 @@ export const SubscriberItems: StaticMenuItem[] = [
       },
     ],
   },
+  // {
+  //   name: 'Ledger',
+  //   href: '/list/ledger',
+  //   icon: <PiFolderNotchDuotone />,
+  // },
   {
-    name: 'Ledger',
-    href: '/list/ledger',
-    icon: <PiFolderNotchDuotone />,
+    name: 'ledger',
+    href: '#',
+    icon: <PiTableDuotone />,
+    dropdownItems: [
+      {
+        name: 'Ledger Creation',
+        href: '/list/ledger',
+        badge: 'new',
+      },
+      {
+        name: 'Ledger Transaction',
+        href: '/Ledger/transaction',
+        badge: 'new',
+      },
+    ],
   },
   {
     name: 'Report',

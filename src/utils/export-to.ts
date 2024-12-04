@@ -49,6 +49,8 @@ export function exportToPDF(
   size: string,
   margin?: { top?: number; right?: number; bottom?: number; left?: number } | any,
 ) {
+  console.log(data, 'data');
+
   const doc = new jsPDF(orientation, 'pt', size);
   if (['Pending List', 'Loan List', 'Customers List'].includes(fileName)) {
     if (margin) {

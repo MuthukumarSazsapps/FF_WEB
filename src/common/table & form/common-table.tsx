@@ -99,12 +99,15 @@ export default function CommonTable({
     );
   };
 
-  const matchedValues = compareArrays(checkedColumns, data);
+  const matchedValues = compareArrays(checkedColumns, tableData);
+  console.log('matchedValues', matchedValues);
+  console.log('tableData', tableData);
+
   return (
     <>
       <ControlledTable
         variant="modern"
-        data={tableData}
+        data={tableData ? tableData : data}
         isLoading={isLoading}
         showLoadingText={true}
         // @ts-ignore
@@ -121,9 +124,13 @@ export default function CommonTable({
         scrollx={scrollx}
         filterOptions={{
           data:
-            filters.CreatedOn[0] || filters.CreatedOn[1] || filters.IsActive
-              ? tableData
-              : matchedValues,
+            filters.CreatedOn[0] ||
+            filters.CreatedOn[1] ||
+            filters.IsActive ||
+            filters.DueDate[0] ||
+            filters.DueDate[1]
+              ? matchedValues
+              : tableData,
           header,
           fileName,
           filters: { filters },

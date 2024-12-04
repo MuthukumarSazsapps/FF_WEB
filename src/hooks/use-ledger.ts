@@ -6,7 +6,7 @@ import { Ledger, LedgerFormFieldTypes } from 'utils/types';
 import useLocalData from './use-localData';
 
 type UseLedgerReturn = {
-  allLedger: Ledger[];
+  allLedger: any[]; //old type Ledger
   loading: boolean;
   listLedgerLoading: boolean;
   createLedger?: string;
