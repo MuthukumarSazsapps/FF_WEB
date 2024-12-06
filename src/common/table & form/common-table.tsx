@@ -99,9 +99,7 @@ export default function CommonTable({
     );
   };
 
-  const matchedValues = compareArrays(checkedColumns, tableData);
-  console.log('matchedValues', matchedValues);
-  console.log('tableData', tableData);
+  const matchedValues = compareArrays(checkedColumns, data);
 
   return (
     <>
@@ -129,8 +127,8 @@ export default function CommonTable({
             filters.IsActive ||
             filters.DueDate[0] ||
             filters.DueDate[1]
-              ? matchedValues
-              : tableData,
+              ? tableData
+              : matchedValues,
           header,
           fileName,
           filters: { filters },

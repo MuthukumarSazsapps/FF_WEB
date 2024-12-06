@@ -145,20 +145,20 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     // width: 200,
     render: (value: string) => value ?? '---',
   },
-  {
-    title: (
-      <HeaderCell
-        title="Modified Date"
-        sortable
-        ascending={sortConfig?.direction === 'asc' && sortConfig?.key === 'ModifiedOn'}
-        descending={sortConfig?.direction === 'desc' && sortConfig?.key === 'ModifiedOn'}
-      />
-    ),
-    onHeaderCell: () => onHeaderCellClick('ModifiedOn'),
-    dataIndex: 'Modified Date',
-    key: 'ModifiedOn',
-    // width: 200,
-    render: (value: Date, row: any) =>
-      row.ModifiedOn ? <DateCell date={row.ModifiedOn} /> : '----',
-  },
+  // {
+  //   title: (
+  //     <HeaderCell
+  //       title="Modified Date"
+  //       sortable
+  //       ascending={sortConfig?.direction === 'asc' && sortConfig?.key === 'ModifiedOn'}
+  //       descending={sortConfig?.direction === 'desc' && sortConfig?.key === 'ModifiedOn'}
+  //     />
+  //   ),
+  //   onHeaderCell: () => onHeaderCellClick('ModifiedOn'),
+  //   dataIndex: 'Modified Date',
+  //   key: 'ModifiedOn',
+  //   // width: 200,
+  //   render: (value: Date, row: any) =>
+  //     row.ModifiedOn ? <DateCell date={row.ModifiedOn} /> : '----',
+  // },
 ];
