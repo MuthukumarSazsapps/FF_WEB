@@ -101,6 +101,14 @@ export default function CommonTable({
 
   const matchedValues = compareArrays(checkedColumns, data);
 
+  const filteredData = matchedValues.filter(item => {
+    const dueDate = new Date(item.DueDate); // Convert string to Date object
+    return dueDate >= filters.DueDate[0] && dueDate <= filters.DueDate[1]; // Check if dueDate is within range
+  });
+
+  console.log('matchedValues', matchedValues);
+  console.log('tableData', tableData);
+
   return (
     <>
       <ControlledTable
@@ -121,14 +129,26 @@ export default function CommonTable({
         styleRow={styleRow}
         scrollx={scrollx}
         filterOptions={{
-          data:
-            filters.CreatedOn[0] ||
-            filters.CreatedOn[1] ||
-            filters.IsActive ||
-            filters.DueDate[0] ||
-            filters.DueDate[1]
-              ? tableData
-              : matchedValues,
+          // data:
+          //   filters.CreatedOn[0] ||
+          //   filters.CreatedOn[1] ||
+          //   filters.IsActive ||
+          //   filters.DueDate[0] ||
+          //   filters.DueDate[1]
+          //     ? filteredData.length?filteredData:tableData
+          //     : matchedValues,
+          data: (() => {
+            const hasFilters =
+              (filters.CreatedOn && (filters.CreatedOn[0] || filters.CreatedOn[1])) ||
+              filters.IsActive ||
+              (filters.DueDate && (filters.DueDate[0] || filters.DueDate[1]));
+
+            if (hasFilters) {
+              return filteredData && filteredData.length > 0 ? filteredData : tableData;
+            }
+
+            return matchedValues;
+          })(),
           header,
           fileName,
           filters: { filters },
