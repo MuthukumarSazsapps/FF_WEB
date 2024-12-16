@@ -292,7 +292,7 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
                 height={100}
                 alt="Customer Photo"
                 className="bg-white object-fill overflow-hidden rounded-full"
-                src={`http://localhost:5000/customer/${customerProfile.CustomerPhotoURL}`}
+                src={customerProfile.CustomerPhotoURL}
               />
             </div>
             <div className="pt-2 flex text-base font-bold">

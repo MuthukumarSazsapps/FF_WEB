@@ -5,6 +5,9 @@ import UploadIcon from 'components/shape/upload';
 import { FieldError } from 'rizzui';
 import { Text } from 'rizzui';
 import { PiPencilSimple } from 'react-icons/pi';
+import { PiEyeBold } from 'react-icons/pi';
+import Button from './button';
+import { Link } from 'react-router-dom';
 
 interface AvatarUploadProps {
   name: string;
@@ -34,6 +37,8 @@ const AvatarUpload = forwardRef<HTMLDivElement, AvatarUploadProps>(
       [file],
     );
 
+    console.log(avatar, 'avatar');
+
     useEffect(() => {
       setValue(avatar);
       setFile(avatar);
@@ -56,11 +61,15 @@ const AvatarUpload = forwardRef<HTMLDivElement, AvatarUploadProps>(
       if (!image) return '';
 
       if (image.toString().includes('blob:http')) return image;
-      return `${process.env.REACT_APP_API_URL}${role}/${image}`;
+      // return `${process.env.REACT_APP_API_URL}${role}/${image}`;----old
+      return image;
     };
 
     return (
       <div className={cn('grid gap-5', className)} ref={ref}>
+        <Link to={avatar} target="_blank">
+          <Button label="view" className="w-4" type="button" />
+        </Link>
         <div className={cn('relative grid h-40 w-40 place-content-center rounded-full border')}>
           {formValue && file ? (
             <>

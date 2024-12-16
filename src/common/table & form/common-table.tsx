@@ -106,9 +106,6 @@ export default function CommonTable({
     return dueDate >= filters.DueDate[0] && dueDate <= filters.DueDate[1]; // Check if dueDate is within range
   });
 
-  console.log('matchedValues', matchedValues);
-  console.log('tableData', tableData);
-
   return (
     <>
       <ControlledTable

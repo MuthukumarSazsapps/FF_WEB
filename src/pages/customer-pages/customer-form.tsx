@@ -6,7 +6,7 @@ import { CustomerFormDefaultValues, CustomerFormSchema, CustomerFormFieldTypes }
 import SelectBox from 'common/select';
 import SimpleBar from 'common/simplebar';
 import { useDrawer } from 'hooks/use-drawer';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Checkbox, Title } from 'rizzui';
 import SazsSelect from 'common/table & form/sazs-select';
 import CenterSpinner from 'common/center-spinner';
@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastErrorMessage, ToastSuccessMessage } from 'common/table & form/toastMessage';
 import UploadZone from 'common/fileupload/upload-zone';
 import ImportFileUploader from 'common/table & form/import-file';
+import { FileInput } from 'common/file-upload';
 
 export type renderProbs = (
   control: any,
@@ -42,6 +43,8 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
   });
   const innerRef = useRef(null);
   const navigate = useNavigate();
+
+  // const [file, setFile] = useState<string | null>(null);
 
   useEffect(() => {
     if (createCustomerState?.includes('Successfully')) {
@@ -68,6 +71,8 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
     if (data) {
       handleUpdate(data.CustomerId, obj);
     } else {
+      console.log(obj);
+
       handleSubmit(obj);
     }
   };
@@ -564,8 +569,9 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
                   <FormGroup
                     title="Customer Photo"
                     description="Upload Customer Photo Here."
-                    className="pt-2 @2xl:pt-3 @3xl:grid-cols-12 @3xl:pt-4">
-                    <div className="flex flex-col gap-6 @container @3xl:col-span-2">
+                    className="pt-1 @2xl:pt-1 @3xl:grid-cols-6 @3xl:pt-2"
+                    childrenclass="@2xl:grid-cols-5">
+                    <div className="@3xl:col-span-2">
                       <AvatarUpload
                         {...register('CustomerPhotoURL' as const)}
                         ref={innerRef}
@@ -582,16 +588,27 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
                         error={errors?.CustomerPhotoURL?.message as string}
                       />
                     </div>
-                    {/* <ImportFileUploader label="Vehicle Document" /> */}
-                    {/* <div className="inline-grid">
-                      <UploadZone
-                        name="portfolios"
-                        getValues={getValues}
-                        label="Proof Document"
-                        setValue={setValue}
-                        // error={errors?.portfolios?.message as string}
-                      />
-                    </div> */}
+
+                    {/* <div className="@3xl:col-span-2">
+                    <UploadZone
+                      {...register('CustomerPhotoURL' as const)}
+                     
+                      name="CustomerPhotoURL"
+                      getValues={getValues}
+                      setValue={(name:any, file:any) => {
+
+                        console.log(name,file);
+                        
+                        // Convert File object to a URL string
+                        if (file instanceof File) {
+                          const fileURL = URL.createObjectURL(file);
+                          setValue(name, fileURL); // Save the URL to the form field
+                        }
+                      }}
+                      label="Vehicle Document"
+                      error={errors?.CustomerPhotoURL?.message as string}
+                    />
+                  </div> */}
                   </FormGroup>
                 </div>
                 <FormFooter

@@ -123,7 +123,7 @@ export default function CustomerReportPage() {
                 height={120}
                 alt="Customer Photo"
                 className="bg-white object-contain self-center overflow-hidden rounded-full"
-                src={`http://localhost:5000/customer/${customerInfo.CustomerPhotoURL}`}
+                src={customerInfo.CustomerPhotoURL}
               />
               <h2 className="text-blue-700">{customerInfo.CustomerId}</h2>
             </div>
