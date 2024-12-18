@@ -2,6 +2,16 @@ import { string, z } from 'zod';
 import { messages } from 'config/messages';
 import { validateEmail } from './common-rules';
 
+const CustomerPhotoURLSchema = z.union([
+  z.string().url('Invalid URL'), // Allows a valid URL as a string
+  z.object({
+    // Allows an object with specific properties
+    name: z.string(),
+    url: z.string().url('Invalid file URL'),
+    size: z.number(),
+  }),
+]);
+
 export const CustomerFormSchema = z.object({
   CustomerName: z
     .string()
@@ -50,6 +60,7 @@ export const CustomerFormSchema = z.object({
     .optional(),
   CustomerEmail: string().optional(),
   CustomerPhotoURL: z.string(),
+  CustomerDocumentURL: z.string(),
   CustomerRating: z.coerce.string(),
   CustomerIsBlocked: z.boolean(),
   CustomerIsCurrent: z.boolean(),
@@ -92,6 +103,7 @@ export const CustomerFormDefaultValues = {
   CustomerAlternatePhoneNo: '',
   CustomerEmail: '',
   CustomerPhotoURL: new File([], 'temp.txt'),
+  CustomerDocumentURL: new File([], 'temp.txt'),
   CustomerRating: '5',
   CustomerIsBlocked: false,
   CustomerIsCurrent: true,

@@ -139,6 +139,21 @@ const createCustomer = async (
     formData.append('CustomerPhotoURL', '');
   }
 
+  const documentURL = CustomerData.CustomerDocumentURL || '';
+  if (documentURL) {
+    try {
+      const blob = await fetch(documentURL).then(r => r.blob());
+      const myFile = new File([blob], `${Date.now()}.${blob.type.split('/').pop()}`, {
+        type: blob.type,
+      });
+      formData.append('CustomerDocumentURL', myFile);
+    } catch (error) {
+      console.warn('Failed to fetch CustomerDocumentURL:', error);
+      formData.append('CustomerDocumentURL', '');
+    }
+  } else {
+    formData.append('CustomerDocumentURL', '');
+  }
   // API Call
   try {
     const response = await axiosInstance.post(APIRoutes.customerCreate, formData, {
@@ -210,6 +225,21 @@ const updateCustomer = async (
     formData.append('CustomerPhotoURL', '');
   }
 
+  const documentURL = CustomerData.CustomerDocumentURL || '';
+  if (documentURL) {
+    try {
+      const blob = await fetch(documentURL).then(r => r.blob());
+      const myFile = new File([blob], `${Date.now()}.${blob.type.split('/').pop()}`, {
+        type: blob.type,
+      });
+      formData.append('CustomerDocumentURL', myFile);
+    } catch (error) {
+      console.warn('Failed to fetch CustomerDocumentURL:', error);
+      formData.append('CustomerDocumentURL', '');
+    }
+  } else {
+    formData.append('CustomerDocumentURL', '');
+  }
   // const response = await axiosInstance
   //   .put(`${APIRoutes.customerUpdate}/${CustomerId}`, formData)
   //   .then(result => result.data)

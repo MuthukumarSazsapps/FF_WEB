@@ -8,6 +8,24 @@ interface UserData {
   [key: string]: string | number | Date;
 }
 
+export function downloadFile(url: string, fileName: string) {
+  fetch(url)
+    .then(response => response.blob()) // Convert the response into a blob
+    .then(blob => {
+      const blobUrl = URL.createObjectURL(blob); // Create a temporary URL for the blob
+      const anchor = document.createElement('a'); // Create an anchor element
+      anchor.href = blobUrl;
+      anchor.download = fileName; // Set the suggested download filename
+      document.body.appendChild(anchor); // Append the anchor to the DOM
+      anchor.click(); // Trigger the download
+      document.body.removeChild(anchor); // Clean up the DOM
+      URL.revokeObjectURL(blobUrl); // Revoke the temporary URL
+    })
+    .catch(error => {
+      console.error('Download failed:', error);
+    });
+}
+
 export function exportToCSV(data: any[], fileName: string) {
   if (data.length === 0) {
     console.error('Data array is empty.');

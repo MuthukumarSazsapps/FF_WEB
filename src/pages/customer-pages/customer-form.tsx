@@ -567,8 +567,8 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
                   {renderCustomerInfo(control, getValues, errors, register, setValue)}
 
                   <FormGroup
-                    title="Customer Photo"
-                    description="Upload Customer Photo Here."
+                    title="Customer Document"
+                    description="Upload Customer Document Here."
                     className="pt-1 @2xl:pt-1 @3xl:grid-cols-6 @3xl:pt-2"
                     childrenclass="@2xl:grid-cols-5">
                     <div className="@3xl:col-span-2">
@@ -583,32 +583,32 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
                         avatar={data?.CustomerPhotoURL ?? ''}
                         getFile={() => {
                           const value = getValues('CustomerPhotoURL');
+                          console.log('value', value);
+
                           return value !== undefined ? String(value) : '';
                         }}
                         error={errors?.CustomerPhotoURL?.message as string}
                       />
                     </div>
+                    <div className="@3xl:col-span-2">
+                      <AvatarUpload
+                        {...register('CustomerDocumentURL' as const)}
+                        ref={innerRef}
+                        name="CustomerDocumentURL"
+                        setFile={data => {
+                          setValue('CustomerDocumentURL', data);
+                        }}
+                        role="customer"
+                        avatar={data?.CustomerDocumentURL ?? ''}
+                        getFile={() => {
+                          const value = getValues('CustomerDocumentURL');
+                          console.log('value', value);
 
-                    {/* <div className="@3xl:col-span-2">
-                    <UploadZone
-                      {...register('CustomerPhotoURL' as const)}
-                     
-                      name="CustomerPhotoURL"
-                      getValues={getValues}
-                      setValue={(name:any, file:any) => {
-
-                        console.log(name,file);
-                        
-                        // Convert File object to a URL string
-                        if (file instanceof File) {
-                          const fileURL = URL.createObjectURL(file);
-                          setValue(name, fileURL); // Save the URL to the form field
-                        }
-                      }}
-                      label="Vehicle Document"
-                      error={errors?.CustomerPhotoURL?.message as string}
-                    />
-                  </div> */}
+                          return value !== undefined ? String(value) : '';
+                        }}
+                        error={errors?.CustomerDocumentURL?.message as string}
+                      />
+                    </div>
                   </FormGroup>
                 </div>
                 <FormFooter
