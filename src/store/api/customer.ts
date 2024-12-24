@@ -87,8 +87,6 @@ const createCustomer = async (
   SubscriberId: string,
   CustomerData: CustomerFormFieldTypes,
 ) => {
-  console.log(CustomerData.CustomerPhotoURL, 'CustomerData.CustomerPhotoURL');
-
   const formData = new FormData();
 
   // Append customer data

@@ -118,6 +118,7 @@ import Button from './button';
 import { Link } from 'react-router-dom';
 
 interface AvatarUploadProps {
+  label: String;
   name: string;
   className?: string;
   error?: string;
@@ -129,7 +130,16 @@ interface AvatarUploadProps {
 
 const AvatarUpload = forwardRef<HTMLDivElement, AvatarUploadProps>(
   (
-    { name, className, error, getFile: getValue, setFile: setValue, avatar, role = 'subscriber' },
+    {
+      label,
+      name,
+      className,
+      error,
+      getFile: getValue,
+      setFile: setValue,
+      avatar,
+      role = 'subscriber',
+    },
     ref,
   ) => {
     const [file, setFile] = useState<string>();
@@ -150,7 +160,7 @@ const AvatarUpload = forwardRef<HTMLDivElement, AvatarUploadProps>(
     useEffect(() => {
       setValue(avatar);
       setFile(avatar);
-    }, [avatar, setValue]);
+    }, [avatar]);
 
     const { getRootProps, getInputProps } = useDropzone({
       onDrop,
@@ -175,9 +185,11 @@ const AvatarUpload = forwardRef<HTMLDivElement, AvatarUploadProps>(
       if (
         formValue?.includes('blob:') ||
         formValue?.endsWith('.jpg') ||
+        formValue?.endsWith('.jpeg') ||
         formValue?.endsWith('.png') ||
         file?.includes('blob:') ||
         file?.includes('.jpg') ||
+        file?.includes('.jpeg') ||
         file?.endsWith('.png')
       )
         return 'image';
@@ -186,7 +198,6 @@ const AvatarUpload = forwardRef<HTMLDivElement, AvatarUploadProps>(
     };
 
     const fileType = getFileType();
-
     const getFileSrc = () => {
       if (
         formValue?.includes('blob:') ||
@@ -196,22 +207,13 @@ const AvatarUpload = forwardRef<HTMLDivElement, AvatarUploadProps>(
         return formValue;
       if (file?.includes('blob:') || formValue?.includes('.jpg') || formValue?.includes('.png'))
         return file;
-      console.log(formValue, file);
       return formValue || file || '';
     };
 
     return (
-      <div className={cn('grid gap-5', className)} ref={ref}>
-        {/* <Link to={`${getFileSrc()}`} target="_blank"> */}
-        <Button
-          label="view"
-          className="w-4"
-          type="button"
-          onClick={() => downloadFile(`${getFileSrc()}`, 'image')}
-        />
-        <button onClick={() => downloadFile(avatar, 'image')}>download</button>
-        {/* </Link> */}
-        <div className={cn('relative grid h-40 w-40 place-content-center rounded-full border')}>
+      <div className={cn('grid gap-5 place-content-start', className)} ref={ref}>
+        {label && <span className="mb-1.5 block font-semibold  text-violet-800 ">{label}</span>}
+        <div className={cn('relative grid  h-40 w-40 place-content-center rounded-full border')}>
           {formValue || file ? (
             <>
               {fileType === 'image' && (
@@ -263,6 +265,14 @@ const AvatarUpload = forwardRef<HTMLDivElement, AvatarUploadProps>(
               <Text className="font-medium">Drop or select file</Text>
             </div>
           )}
+        </div>
+        <div className="grid place-content-center">
+          <Button
+            label="Download"
+            disabled={fileType?.length ? false : true}
+            type="button"
+            onClick={() => downloadFile(getFileSrc(), 'image')}
+          />
         </div>
         {error && <FieldError error={error} />}
       </div>

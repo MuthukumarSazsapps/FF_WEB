@@ -8,7 +8,7 @@ interface UserData {
   [key: string]: string | number | Date;
 }
 
-export function downloadFile(url: string, fileName: string) {
+export function downloadFile(url: any, fileName: string) {
   fetch(url)
     .then(response => response.blob()) // Convert the response into a blob
     .then(blob => {

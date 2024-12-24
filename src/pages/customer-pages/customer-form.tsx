@@ -71,8 +71,6 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
     if (data) {
       handleUpdate(data.CustomerId, obj);
     } else {
-      console.log(obj);
-
       handleSubmit(obj);
     }
   };
@@ -571,10 +569,11 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
                     description="Upload Customer Document Here."
                     className="pt-1 @2xl:pt-1 @3xl:grid-cols-6 @3xl:pt-2"
                     childrenclass="@2xl:grid-cols-5">
-                    <div className="@3xl:col-span-2">
+                    <div className="@3xl:col-span-1">
                       <AvatarUpload
                         {...register('CustomerPhotoURL' as const)}
                         ref={innerRef}
+                        label="Upload Photo "
                         name="CustomerPhotoURL"
                         setFile={data => {
                           setValue('CustomerPhotoURL', data);
@@ -583,17 +582,16 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
                         avatar={data?.CustomerPhotoURL ?? ''}
                         getFile={() => {
                           const value = getValues('CustomerPhotoURL');
-                          console.log('value', value);
-
                           return value !== undefined ? String(value) : '';
                         }}
                         error={errors?.CustomerPhotoURL?.message as string}
                       />
                     </div>
-                    <div className="@3xl:col-span-2">
+                    <div className="@3xl:col-span-1">
                       <AvatarUpload
                         {...register('CustomerDocumentURL' as const)}
                         ref={innerRef}
+                        label="Upload PDF "
                         name="CustomerDocumentURL"
                         setFile={data => {
                           setValue('CustomerDocumentURL', data);
@@ -602,8 +600,6 @@ export default function CustomerForm({ data, isEdit = false }: { data?: any; isE
                         avatar={data?.CustomerDocumentURL ?? ''}
                         getFile={() => {
                           const value = getValues('CustomerDocumentURL');
-                          console.log('value', value);
-
                           return value !== undefined ? String(value) : '';
                         }}
                         error={errors?.CustomerDocumentURL?.message as string}

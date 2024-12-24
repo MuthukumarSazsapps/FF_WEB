@@ -31,6 +31,8 @@ export const LoanFormSchema = z
     DocumentCharges: z.coerce.number().min(1, { message: messages.DocumentChargesRequired }),
     AgentId: z.string().optional(),
     AgentCommission: z.coerce.number().optional(),
+    VehiclePhotoURL: z.string(),
+    VehicleDocsURL: z.string(),
     IsActive: z.boolean(),
   })
   .refine(
@@ -74,6 +76,8 @@ export const LoanFormDefaultValues = {
   Interest: null,
   Tenure: null,
   CalculatedEmiAmount: null,
+  VehiclePhotoURL: new File([], 'temp.txt'),
+  VehicleDocsURL: new File([], 'temp.txt'),
   ActualEmiAmount: null,
   PrincipalAmount: null,
   InterestAmount: null,

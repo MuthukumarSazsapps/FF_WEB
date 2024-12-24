@@ -6,7 +6,7 @@ import { LoanFormDefaultValues, LoanFormSchema, LoanFormFieldTypes } from 'utils
 import SelectBox from 'common/select';
 import SimpleBar from 'common/simplebar';
 import { useDrawer } from 'hooks/use-drawer';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Checkbox, Title, Tooltip } from 'rizzui';
 import SazsSelect from 'common/table & form/sazs-select';
 import CenterSpinner from 'common/center-spinner';
@@ -20,6 +20,7 @@ import useCustomers from 'hooks/use-customer';
 import { actions, dispatch } from 'store';
 import UploadZone from 'common/fileupload/upload-zone';
 import { ToastSuccessMessage } from 'common/table & form/toastMessage';
+import AvatarUpload from 'common/avatar-upload';
 
 export type renderProbs = (
   control: any,
@@ -46,6 +47,8 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
       PageName: 'LoanForm',
     });
   const navigate = useNavigate();
+  const innerRef = useRef(null);
+
   const calculateEMI = (principal: any, interestRate: any, tenureInMonths: any) => {
     if (principal && interestRate && tenureInMonths) {
       const monthlyPrincipalRate = principal / tenureInMonths;
@@ -58,6 +61,7 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
       return emi;
     }
   };
+
   useEffect(() => {
     dispatch(actions.resetgetCustomers());
     if (data) {
@@ -84,6 +88,8 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
     if (data) {
       handleUpdate(data.LoanId, obj);
     } else {
+      console.log(obj);
+
       handleSubmit(obj);
     }
   };
@@ -711,30 +717,46 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
   const renderFileUpLoad: renderProbs = (control, getValues, errors, register, setValue) => {
     return (
       <FormGroup
-        title="Document File Uploader"
-        description=""
+        title="Vehilce Document"
+        description="Upload Customer Document Here."
         className="pt-1 @2xl:pt-1 @3xl:grid-cols-6 @3xl:pt-2"
         childrenclass="@2xl:grid-cols-5">
-        {/* <ImportFileUploader label="Vehicle Document" /> */}
-        <div className="@3xl:col-span-2">
-          <UploadZone
-            name="portfolios"
-            getValues={getValues}
-            label="Proof Document"
-            setValue={setValue}
-            error={errors?.portfolios?.message as string}
+        <div className="@3xl:col-span-1">
+          <AvatarUpload
+            {...register('VehiclePhotoURL' as const)}
+            ref={innerRef}
+            label="Upload Photo "
+            name="VehiclePhotoURL"
+            setFile={data => {
+              setValue('VehiclePhotoURL', data);
+            }}
+            role="customer"
+            avatar={data?.VehiclePhotoURL ?? ''}
+            getFile={() => {
+              const value = getValues('VehiclePhotoURL');
+              return value !== undefined ? String(value) : '';
+            }}
+            error={errors?.VehiclePhotoURL?.message as string}
           />
         </div>
-        <div className="@3xl:col-span-2">
-          <UploadZone
-            name="portfolios"
-            getValues={getValues}
-            setValue={setValue}
-            label="Vehicle Document"
-            error={errors?.portfolios?.message as string}
+        <div className="@3xl:col-span-1">
+          <AvatarUpload
+            {...register('VehicleDocsURL' as const)}
+            ref={innerRef}
+            label="Upload PDF "
+            name="VehicleDocsURL"
+            setFile={data => {
+              setValue('VehicleDocsURL', data);
+            }}
+            role="customer"
+            avatar={data?.VehicleDocsURL ?? ''}
+            getFile={() => {
+              const value = getValues('VehicleDocsURL');
+              return value !== undefined ? String(value) : '';
+            }}
+            error={errors?.VehicleDocsURL?.message as string}
           />
         </div>
-        {/* <ImportFileUploader label="Proof Document" /> */}
       </FormGroup>
     );
   };

@@ -64,11 +64,14 @@ const useLoans = (apiFlags = defaultAPIFlags): UseLoanReturn => {
     if (apiFlags.create) {
       dispatch(
         actions.createLoanRequest({
-          LoanData: {
-            ...formData,
-            CreatedBy: username,
-            SubscriberId: subscriber,
-          },
+          // LoanData: {
+          //   ...formData,
+          //   CreatedBy: username,
+          //   SubscriberId: subscriber,
+          // },
+          LoanData: formData,
+          CreatedBy: username,
+          SubscriberId: subscriber,
         }),
       );
     }
@@ -79,7 +82,8 @@ const useLoans = (apiFlags = defaultAPIFlags): UseLoanReturn => {
       dispatch(
         actions.updateLoanRequest({
           LoanId: id,
-          updateData: { ...formData, ModifiedBy: username },
+          updateData: formData,
+          ModifiedBy: username,
         }),
       );
     }

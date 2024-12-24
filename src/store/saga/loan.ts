@@ -22,11 +22,15 @@ function* listLoansSaga(
 }
 
 function* createLoansaga(
-  action: PayloadAction<{ LoanData: LoanFormFieldTypes }>,
+  action: PayloadAction<{
+    CreatedBy: string;
+    SubscriberId: string;
+    LoanData: LoanFormFieldTypes;
+  }>,
 ): Generator<Effect, void, unknown> {
   try {
-    const { LoanData } = action.payload;
-    const response = yield call(api.loan.createLoan, LoanData);
+    const { CreatedBy, SubscriberId, LoanData } = action.payload;
+    const response = yield call(api.loan.createLoan, CreatedBy, SubscriberId, LoanData);
     if (response) {
       yield put(LoanSlice.actions.createLoanSuccess(response));
     } else {
@@ -39,12 +43,13 @@ function* createLoansaga(
 function* updateLoansaga(
   action: PayloadAction<{
     LoanId: string;
+    ModifiedBy: string;
     updateData: LoanFormFieldTypes;
   }>,
 ): Generator<Effect, void, unknown> {
   try {
-    const { LoanId, updateData } = action.payload;
-    const response = yield call(api.loan.updateLoan, LoanId, updateData);
+    const { LoanId, ModifiedBy, updateData } = action.payload;
+    const response = yield call(api.loan.updateLoan, LoanId, ModifiedBy, updateData);
     if (response) {
       yield put(LoanSlice.actions.updateLoanSuccess(response));
     } else {

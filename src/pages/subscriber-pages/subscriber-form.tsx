@@ -455,6 +455,7 @@ export default function SubscriberForm({ data, isEdit = false }: { data?: any; i
                         {...register('Logo' as const)}
                         ref={innerRef}
                         name="Logo"
+                        label=""
                         setFile={data => {
                           setValue('Logo', data);
                         }}

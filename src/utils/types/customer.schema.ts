@@ -2,16 +2,6 @@ import { string, z } from 'zod';
 import { messages } from 'config/messages';
 import { validateEmail } from './common-rules';
 
-const CustomerPhotoURLSchema = z.union([
-  z.string().url('Invalid URL'), // Allows a valid URL as a string
-  z.object({
-    // Allows an object with specific properties
-    name: z.string(),
-    url: z.string().url('Invalid file URL'),
-    size: z.number(),
-  }),
-]);
-
 export const CustomerFormSchema = z.object({
   CustomerName: z
     .string()
