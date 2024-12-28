@@ -718,7 +718,7 @@ export default function LoanForm({ data, isEdit = false }: { data?: any; isEdit?
     return (
       <FormGroup
         title="Vehilce Document"
-        description="Upload Customer Document Here."
+        description="Upload Vehicle Document Here."
         className="pt-1 @2xl:pt-1 @3xl:grid-cols-6 @3xl:pt-2"
         childrenclass="@2xl:grid-cols-5">
         <div className="@3xl:col-span-1">

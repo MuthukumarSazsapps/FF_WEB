@@ -139,6 +139,7 @@ export default function SubscriberForm({ data, isEdit = false }: { data?: any; i
                 }
                 onChange={onChange}
                 register={register}
+                // value={value}
                 error={errors.Password?.message}
               />
             )}

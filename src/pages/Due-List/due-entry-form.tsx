@@ -52,9 +52,9 @@ export default function DueEntryForm({ LoanId }: { LoanId: string }) {
             defaultValues: {
               ...currentDue,
               PaymentMethod: '',
-              PaidLateFees: currentDue.LateFees,
+              // PaidLateFees: currentDue.LateFees,
               EmiDate: new Date(currentDue.EmiDate).toLocaleDateString('en-GB'),
-              PaidAmount: currentDue.BalanceAmount,
+              // PaidAmount: currentDue.BalanceAmount,
               Remarks: 'Payment Success',
             },
           }}>

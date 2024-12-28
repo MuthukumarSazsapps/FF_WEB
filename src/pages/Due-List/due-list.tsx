@@ -8,9 +8,15 @@ import { useDrawer } from 'hooks/use-drawer';
 import DrawerHeader from 'components/settings/drawer-header';
 import DueEntryForm from './due-entry-form';
 import useDue from 'hooks/use-due';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CommonTable from 'common/table & form/common-table';
 import { getColumns } from './due-columns';
+import { downloadFile } from 'utils';
+import vehicle from 'store/api/vehicle';
+import { Modal, ActionIcon } from 'rizzui';
+import { Empty } from 'rizzui';
+import { Title, Text } from 'rizzui';
+import { HiOutlineXMark } from 'react-icons/hi2';
 
 export const metadata = {
   ...metaObject('Enhanced Table'),
@@ -47,6 +53,13 @@ export default function CustomerReportPage() {
   const { dueEntryState, dueDeleteState } = useDue();
   const { openDrawer, closeDrawer } = useDrawer();
   const [loading, setLoading] = useState(false);
+  // const [modalState, setModalState] = useState(false);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    size: 'lg',
+    url: '',
+    type: '',
+  });
 
   useEffect(() => {
     setSelectedCustomer('');
@@ -69,6 +82,59 @@ export default function CustomerReportPage() {
       getReport(loanInfo.LoanId);
     }
   }, [dueEntryState, dueDeleteState]);
+
+  function DocsView({ photoURL }: any) {
+    return (
+      <>
+        <Modal
+          isOpen={modalState.isOpen}
+          size="lg"
+          onClose={() => setModalState(prevState => ({ ...prevState, isOpen: false }))}>
+          <div className="m-auto px-7 pt-6 pb-8">
+            <ActionIcon
+              size="sm"
+              variant="text"
+              onClick={() => setModalState(prevState => ({ ...prevState, isOpen: false }))}>
+              <HiOutlineXMark className="h-auto w-6" strokeWidth={1.8} />
+            </ActionIcon>
+            {modalState.type === 'pdf' ? (
+              <div className="w-full h-[70vh] overflow-hidden">
+                {photoURL ? (
+                  <iframe src={photoURL} title="PDF Viewer" className="w-full h-full border-0" />
+                ) : (
+                  <div className="py-5 text-center lg:py-8">
+                    <Empty /> <Text className="mt-3">No Data</Text>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                {photoURL ? (
+                  <img src={photoURL} alt="photo" />
+                ) : (
+                  <div className="py-5 text-center lg:py-8">
+                    <Empty /> <Text className="mt-3">No Data</Text>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="mb-7 flex items-center justify-between">
+              <Button
+                disabled={photoURL ? false : true}
+                type="button"
+                label="Download"
+                size="lg"
+                className="col-span-2 mt-2"
+                onClick={() => downloadFile(photoURL, customerInfo.CustomerName)}
+              />
+            </div>
+          </div>
+        </Modal>
+      </>
+    );
+  }
+
   return (
     <>
       {!LoanId && (
@@ -128,10 +194,10 @@ export default function CustomerReportPage() {
               <h2 className="text-blue-700">{customerInfo.CustomerId}</h2>
             </div>
             <div className="flex flex-col  w-3/12 gap-2 w-1/5">
-              <h3 className="self-center mb-3">Customer Details</h3>
+              <h3 className="self-center mb-3">Customer Details</h3>ok
               <div className="flex gap-3">
                 <p className="w-1/3 font-bold">Name</p>
-                <p>{customerInfo.CustomerName}</p>
+                <p className="font-bold">{customerInfo.CustomerName}</p>
               </div>
               <div className="flex gap-3">
                 <p className="w-1/3 font-bold">Father Name</p>
@@ -209,6 +275,58 @@ export default function CustomerReportPage() {
                   <p className="w-2/4 font-bold">Interest</p>
                   <p>{`${loanInfo.Interest} %`}</p>
                 </div>
+                <div className="flex gap-3">
+                  <p
+                    className="w-2/4 font-bold text-blue-600 cursor-pointer"
+                    onClick={() =>
+                      setModalState(prevState => ({
+                        ...prevState,
+                        isOpen: true,
+                        url: customerInfo.CustomerPhotoURL,
+                        type: 'image',
+                      }))
+                    }>
+                    Customer photo
+                  </p>
+                  <p
+                    className="w-2/4 font-bold text-blue-600 cursor-pointer"
+                    onClick={() =>
+                      setModalState(prevState => ({
+                        ...prevState,
+                        isOpen: true,
+                        url: customerInfo.CustomerDocumentURL,
+                        type: 'pdf',
+                      }))
+                    }>
+                    Customer Document
+                  </p>
+                </div>
+                <div className="flex gap-3">
+                  <p
+                    className="w-2/4 font-bold text-blue-600 cursor-pointer"
+                    onClick={() =>
+                      setModalState(prevState => ({
+                        ...prevState,
+                        isOpen: true,
+                        url: loanInfo.VehiclePhotoURL,
+                        type: 'image',
+                      }))
+                    }>
+                    Vehicle photo
+                  </p>
+                  <p
+                    className="w-2/4 font-bold text-blue-600 cursor-pointer"
+                    onClick={() =>
+                      setModalState(prevState => ({
+                        ...prevState,
+                        isOpen: true,
+                        url: loanInfo.VehicleDocsURL,
+                        type: 'pdf',
+                      }))
+                    }>
+                    Vehicle Document
+                  </p>
+                </div>
               </div>
             )}
           </div>
@@ -260,7 +378,6 @@ export default function CustomerReportPage() {
           </div>
         </>
       )}
-
       {!loading && selectedCustomer && transactions.length > 0 && (
         <CommonTable
           rowCount={24}
@@ -273,6 +390,7 @@ export default function CustomerReportPage() {
           data={transactions}
         />
       )}
+      <DocsView photoURL={modalState.url} />
     </>
   );
 }
