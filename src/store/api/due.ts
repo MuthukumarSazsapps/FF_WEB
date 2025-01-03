@@ -28,9 +28,9 @@ const updateDue = async (LoanId: string, formData: DueEntryFormFieldTypes): Prom
     });
   return response?.message;
 };
-const deleteDue = async (LoanId: string, Installment: string) => {
+const deleteDue = async (LoanId: string, Installment: string, ModifiedBy: String) => {
   const response = await axiosInstance
-    .post(APIRoutes.dueDelete, { LoanId, Installment })
+    .post(APIRoutes.dueDelete, { LoanId, Installment, ModifiedBy })
     .then(result => result.data)
     .catch(err => {
       console.log('Update Api error', err);

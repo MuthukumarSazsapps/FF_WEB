@@ -111,7 +111,7 @@ const useDue = (apiFlags = defaultAPIFlags): UseDueReturn => {
   };
 
   const deleteDue = (LoanId: string, Installment: string) => {
-    dispatch(actions.deleteDueRequest({ LoanId, Installment }));
+    dispatch(actions.deleteDueRequest({ LoanId, Installment, ModifiedBy: username }));
   };
 
   useEffect(() => {

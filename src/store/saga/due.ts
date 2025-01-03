@@ -82,11 +82,12 @@ function* deleteDueSaga(
   action: PayloadAction<{
     LoanId: string;
     Installment: string;
+    ModifiedBy: String;
   }>,
 ): Generator<Effect, void, unknown> {
   try {
-    const { LoanId, Installment } = action.payload;
-    const response = yield call(api.due.deleteDue, LoanId, Installment);
+    const { LoanId, Installment, ModifiedBy } = action.payload;
+    const response = yield call(api.due.deleteDue, LoanId, Installment, ModifiedBy);
     if (response) {
       yield put(DueSlice.actions.deleteDueSuccess(response));
     } else {

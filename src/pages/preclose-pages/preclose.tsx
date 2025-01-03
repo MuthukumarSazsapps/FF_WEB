@@ -39,7 +39,7 @@ const paymentoptions = [
 export default function LoanPreclosePage() {
   const { LoanId } = useParams<{ LoanId: string }>();
   const [selectedCustomer, setSelectedCustomer] = useState('');
-  const { getReport, loanInfo, customerInfo, activeLoanList } = useSelectBoxOptions({
+  const { getReport, loanInfo, customerInfo, activeLoanList, loanList } = useSelectBoxOptions({
     PageName: 'CustomerStatement',
   });
   const { ledgers } = useSelectBoxOptions({ PageName: 'PaymentScreen' });
@@ -119,7 +119,7 @@ export default function LoanPreclosePage() {
                         dispatch(actions.resetPrecloseControl());
                         getReport(value.value);
                       }}
-                      options={activeLoanList}
+                      options={loanList}
                       placeholder="Select Customer"
                       errors={errors.LoanId?.message}
                     />

@@ -194,7 +194,7 @@ export default function CustomerReportPage() {
               <h2 className="text-blue-700">{customerInfo.CustomerId}</h2>
             </div>
             <div className="flex flex-col  w-3/12 gap-2 w-1/5">
-              <h3 className="self-center mb-3">Customer Details</h3>ok
+              <h3 className="self-center mb-3">Customer Details</h3>
               <div className="flex gap-3">
                 <p className="w-1/3 font-bold">Name</p>
                 <p className="font-bold">{customerInfo.CustomerName}</p>

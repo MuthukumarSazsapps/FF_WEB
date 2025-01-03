@@ -4,6 +4,8 @@ import DateCell from 'common/date-cell';
 import PencilIcon from 'components/icons/pencil';
 import { UpdateDrawer } from 'common/table & form/update-drawer';
 import DueEdit from './due-edit';
+import { handlePrint } from 'utils/printReceipt';
+import { SlPrinter } from 'react-icons/sl';
 
 export type Loan = {
   Id: string;
@@ -31,9 +33,15 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     width: 20,
     render: (_: string, row: any) =>
       row.PaidIndicator != 'NP' ? (
-        <UpdateDrawer title="Due Edit" customSize="540px">
-          <DueEdit data={row} />
-        </UpdateDrawer>
+        <div className="flex cursor-pointer">
+          <UpdateDrawer title="Due Edit" customSize="540px">
+            <DueEdit data={row} />
+          </UpdateDrawer>
+          <SlPrinter
+            className="me-2 h-[14px] hover:text-blue w-[14px] ml-2 text-gray-500 rounded"
+            onClick={() => handlePrint(row)}
+          />
+        </div>
       ) : (
         ''
       ),
