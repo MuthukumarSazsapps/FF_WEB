@@ -47,6 +47,23 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     render: (value: Date) => <DateCell date={value} time={false} />,
   },
   {
+    title: (
+      <HeaderCell
+        title="EMI Date"
+        sortable
+        className="text-xs"
+        ascending={sortConfig?.direction === 'asc' && sortConfig?.key === 'emidate'}
+        descending={sortConfig?.direction === 'desc' && sortConfig?.key === 'emidate'}
+      />
+    ),
+    onHeaderCell: () => onHeaderCellClick('emidate'),
+    dataIndex: 'emidate',
+    key: 'emidate',
+    width: 100,
+    render: (value: Date) =>
+      value ? <DateCell date={value} time={false} dateFormat="DD/MM" /> : 'N/A',
+  },
+  {
     title: <HeaderCell title="ReceiptNo" />,
     dataIndex: 'TransRefNo',
     key: 'TransRefNo',

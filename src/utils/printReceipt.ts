@@ -149,10 +149,10 @@ export const handlePrint = (record: any) => {
               <strong>Loan Id:</strong> <span>${record.LoanId}</span>
             </div>
             <div class="info-row">
-                <strong>Loan Amount:</strong> <span>${record.LoanAmount}</span>
+                <strong>Loan Amount:</strong> <span>₹ ${record.LoanAmount}</span>
               </div>
             <div class="info-row">
-              <strong>EMI Amount:</strong> <span>${record.EmiAmount}</span>
+              <strong>EMI Amount:</strong> <span>₹ ${record.EmiAmount}</span>
             </div>
             <div class="info-row">
                 <strong>Installment No:</strong> <span>${record.Installment}</span>
