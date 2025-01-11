@@ -93,6 +93,13 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     // width: 150,
     render: (value: Number) => value,
   },
+  // {
+  //   title: <HeaderCell title="Pending Dues" />,
+  //   dataIndex: 'PendingDue',
+  //   key: 'PendingDue',
+  //   // width: 150,
+  //   render: (value: Number) => value,
+  // },
   {
     title: <HeaderCell title="Due.No" />,
     dataIndex: 'CurrentDue',

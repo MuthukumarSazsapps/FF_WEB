@@ -53,7 +53,8 @@ export default function CustomerReportPage() {
   const { dueEntryState, dueDeleteState } = useDue();
   const { openDrawer, closeDrawer } = useDrawer();
   const [loading, setLoading] = useState(false);
-  // const [modalState, setModalState] = useState(false);
+  const [msg, setMsg] = useState('');
+  const [modalStateMsg, setModalStateMsg] = useState(false);
   const [modalState, setModalState] = useState({
     isOpen: false,
     size: 'lg',
@@ -79,6 +80,9 @@ export default function CustomerReportPage() {
   useEffect(() => {
     if (dueEntryState?.includes('Successfully') || dueDeleteState?.includes('Successfully')) {
       setLoading(true);
+      setModalStateMsg(true);
+      console.log('dueEntryState', dueEntryState);
+      setMsg(dueEntryState || '');
       getReport(loanInfo.LoanId);
     }
   }, [dueEntryState, dueDeleteState]);
@@ -391,6 +395,22 @@ export default function CustomerReportPage() {
         />
       )}
       <DocsView photoURL={modalState.url} />
+      <Modal isOpen={modalStateMsg} onClose={() => setModalStateMsg(false)} customSize="520px">
+        <div className="m-auto px-7 pt-6 pb-8">
+          <div className="mb-7 flex items-center justify-between">
+            <Title as="h3">Payment Success</Title>
+            <ActionIcon size="sm" variant="text" onClick={() => setModalStateMsg(false)}>
+              <HiOutlineXMark className="h-auto w-6" strokeWidth={1.8} />
+            </ActionIcon>
+          </div>
+          <div className="mb-7">
+            <h4>{msg}</h4>
+          </div>
+          <Button label="Close" color="success" size="sm">
+            Close
+          </Button>
+        </div>
+      </Modal>
     </>
   );
 }

@@ -47,23 +47,6 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     render: (value: Date) => <DateCell date={value} time={false} />,
   },
   {
-    title: (
-      <HeaderCell
-        title="EMI Date"
-        sortable
-        className="text-xs"
-        ascending={sortConfig?.direction === 'asc' && sortConfig?.key === 'emidate'}
-        descending={sortConfig?.direction === 'desc' && sortConfig?.key === 'emidate'}
-      />
-    ),
-    onHeaderCell: () => onHeaderCellClick('emidate'),
-    dataIndex: 'emidate',
-    key: 'emidate',
-    width: 100,
-    render: (value: Date) =>
-      value ? <DateCell date={value} time={false} dateFormat="DD/MM" /> : 'N/A',
-  },
-  {
     title: <HeaderCell title="ReceiptNo" />,
     dataIndex: 'TransRefNo',
     key: 'TransRefNo',
@@ -103,28 +86,45 @@ export const getColumns = ({ sortConfig, onHeaderCellClick, data }: Columns) => 
     dataIndex: 'Debit',
     key: 'Debit',
     width: 50,
-    render: (value: string) => value,
+    render: (value: string) => (value ? `₹ ${value}` : ''),
   },
   {
     title: <HeaderCell title="Credit" />,
     dataIndex: 'Credit',
     key: 'Credit',
     width: 50,
-    render: (value: string) => value,
+    render: (value: string) => (value ? `₹ ${value}` : ''),
   },
   {
     title: <HeaderCell title="Capital" />,
     dataIndex: 'Capital',
     key: 'Capital',
     width: 50,
-    render: (value: string) => value,
+    render: (value: string) => (value ? `₹ ${value}` : ''),
   },
   {
     title: <HeaderCell title="Interest" />,
     dataIndex: 'Interest',
     key: 'Interest',
     width: 50,
-    render: (value: string) => value,
+    render: (value: string) => (value ? `₹ ${value}` : ''),
+  },
+  {
+    title: (
+      <HeaderCell
+        title="EMI Date"
+        sortable
+        className="text-xs"
+        ascending={sortConfig?.direction === 'asc' && sortConfig?.key === 'emidate'}
+        descending={sortConfig?.direction === 'desc' && sortConfig?.key === 'emidate'}
+      />
+    ),
+    onHeaderCell: () => onHeaderCellClick('emidate'),
+    dataIndex: 'emidate',
+    key: 'emidate',
+    width: 100,
+    render: (value: Date) =>
+      value ? <DateCell date={value} time={false} dateFormat="DD/MM" /> : 'N/A',
   },
   {
     title: <HeaderCell title="Particulars" />,
