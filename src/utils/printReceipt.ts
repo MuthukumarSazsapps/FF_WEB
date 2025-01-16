@@ -28,7 +28,7 @@ export const handlePrint = (record: any) => {
 
       .receipt-container {
         width: 58mm; /* Adjusted for 58mm thermal paper */
-        padding: 2mm;
+        padding: 5px;
         text-align: center;
         box-sizing: border-box;
       }
@@ -94,9 +94,13 @@ export const handlePrint = (record: any) => {
       <div class="date">${currentDate}</div>
       <div class="time">${currentTime}</div>
       <div class="image-icon">
-        <h2>AMALI Auto FINANCE</h2>  
+        <h2>AMALI AUTO FINANCE</h2>  
       </div>
       <p style="position: relative; top: -10px;">924-B2 Main Road ,Kovilpatti</p>
+       <div class="info-row1">
+        <strong>Cell : 9994994953</strong> <strong>PH : 04632-234996</strong>
+      </div>
+      <p>--------------------------------------------------</p>
       <div class="info-row">
         <strong>Customer Id:</strong> <span>${record.CustomerId}</span>
       </div>
