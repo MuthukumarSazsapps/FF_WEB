@@ -15,7 +15,7 @@ export const handlePrint = (record: any) => {
 
   // Prepare the HTML content for the receipt
   const receiptHTML = `
-     <html>
+    <html>
   <head>
     <title>EMI Receipt</title>
     <style>
@@ -28,7 +28,7 @@ export const handlePrint = (record: any) => {
 
       .receipt-container {
         width: 58mm; /* Adjusted for 58mm thermal paper */
-        padding: 5px;
+        padding: 0px;
         text-align: center;
         box-sizing: border-box;
       }
@@ -44,16 +44,33 @@ export const handlePrint = (record: any) => {
         justify-content: space-between;
         font-size: 10px;
       }
+      .info-row1 {
+        margin: 0;
+        padding: 00;
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+      }
 
+      .address{
+        margin: 0;
+        padding: 0;
+        font-size: 9px;
+      }
+      .detail{
+        border-bottom:  1px dotted #000;
+        margin: 0 0 5px 0;
+        padding: 0;
+      }
       .info-row strong {
         text-align: left;
       }
 
-      .date,
-      .time {
+      .datetime{
+        margin: 1px 0;
+        display: flex;
+        justify-content: space-between;
         font-size: 9px;
-        text-align: left;
-        display: inline-block;
       }
 
       .barcode {
@@ -64,7 +81,7 @@ export const handlePrint = (record: any) => {
 
       .description {
         margin-top: 5px;
-        border-top: 1px solid #000;
+        border-top: 1px dotted #000;
         padding-top: 3px;
         font-size: 9px;
         text-align: left;
@@ -75,7 +92,7 @@ export const handlePrint = (record: any) => {
         gap: 5px;
         justify-content: center;
         align-items: center;
-        margin-bottom: 5px;
+        margin: 0px;
       }
 
       /* Media query for larger paper sizes */
@@ -91,16 +108,21 @@ export const handlePrint = (record: any) => {
   </head>
   <body>
     <div class="receipt-container">
-      <div class="date">${currentDate}</div>
-      <div class="time">${currentTime}</div>
+      <div class="datetime">
+        <p>${currentDate}</p>
+        <p>${currentTime}</p>
+      </div>
+      <!-- <div class="date"></div>
+      <div class="time"></div> -->
       <div class="image-icon">
-        <h2>AMALI AUTO FINANCE</h2>  
+        <h2>AMALI AUTO FINANCE</h2>
       </div>
-      <p style="position: relative; top: -10px;">924-B2 Main Road ,Kovilpatti</p>
-       <div class="info-row1">
-        <strong>Cell : 9994994953</strong> <strong>PH : 04632-234996</strong>
+      <div class="detail">
+        <p class="address">924-B2 Main Road,Kovilpatti</p>
+        <div class="info-row1">
+          <p> <strong>Cell</strong>  : 9994994953</p> <p> <b>PH</b> : 04632-234996</p>
+        </div>
       </div>
-      <p>--------------------------------------------------</p>
       <div class="info-row">
         <strong>Customer Id:</strong> <span>${record.CustomerId}</span>
       </div>
@@ -109,9 +131,6 @@ export const handlePrint = (record: any) => {
       </div>
       <div class="info-row">
         <strong>Loan Id:</strong> <span>${record.LoanId}</span>
-      </div>
-      <div class="info-row">
-        <strong>Loan Amount:</strong> <span>₹ ${record.LoanAmount}</span>
       </div>
       <div class="info-row">
         <strong>EMI Amount:</strong> <span>₹ ${record.EmiAmount}</span>
