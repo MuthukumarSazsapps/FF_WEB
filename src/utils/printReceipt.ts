@@ -8,10 +8,10 @@ export const handlePrint = (record: any) => {
   const canvas = document.createElement('canvas');
 
   // Get the current date and time
-  const currentDate = dayjs().format('YYYY-MM-DD');
+  const currentDate = dayjs().format('DD-MM-YYYY');
   const currentTime = dayjs().format('hh:mm:ss A');
-  const EmiDate = dayjs(record.EmiDate).format('YYYY-MM-DD');
-  const ReceiptTime = dayjs(record.ReceiptDate).format('hh:mm:ss A');
+  const EmiDate = dayjs(record.EmiDate).format('DD-MM-YYYY');
+  const ReceiptTime = dayjs(record.ReceiptDate).format('DD-MM-YYYY');
 
   // Prepare the HTML content for the receipt
   const receiptHTML = `
@@ -21,41 +21,41 @@ export const handlePrint = (record: any) => {
     <style>
       body {
         font-family: Arial, sans-serif;
-        font-size: 12px; /* Adjusted for thermal printer */
+        font-size: 18px; /* Adjusted for thermal printer */
         margin: 0;
         padding: 0;
       }
 
       .receipt-container {
-        width: 58mm; /* Adjusted for 58mm thermal paper */
+        width: 88mm; /* Adjusted for 58mm thermal paper */
         padding: 0px;
         text-align: center;
         box-sizing: border-box;
       }
 
       h2 {
-        margin: 5px 0;
-        font-size: 12px;
+        margin: 1px 0;
+        font-size: 18px;
       }
 
       .info-row {
         margin: 3px 0;
         display: flex;
         justify-content: space-between;
-        font-size: 10px;
+        font-size: 12px;
       }
       .info-row1 {
         margin: 0;
-        padding: 00;
+        padding: 0;
         display: flex;
         justify-content: space-between;
-        font-size: 10px;
+        font-size: 12px;
       }
 
       .address{
         margin: 0;
         padding: 0;
-        font-size: 9px;
+        font-size: 12px;
       }
       .detail{
         border-bottom:  1px dotted #000;
@@ -124,22 +124,22 @@ export const handlePrint = (record: any) => {
         </div>
       </div>
       <div class="info-row">
+        <strong>Loan Account:</strong> <span>${record.LoanId}</span>
+      </div>
+      <div class="info-row">
         <strong>Customer Id:</strong> <span>${record.CustomerId}</span>
       </div>
       <div class="info-row">
         <strong>Customer Name:</strong> <span>${record.CustomerName}</span>
       </div>
+       <div class="info-row">
+        <strong>Vehicle:</strong> <span>${record.RegisterNumber}</span>
+      </div>
       <div class="info-row">
-        <strong>Loan Id:</strong> <span>${record.LoanId}</span>
+        <strong>Installment No:</strong> <span>${record.Installment}/${record.Tenure}</span>
       </div>
       <div class="info-row">
         <strong>EMI Amount:</strong> <span>₹ ${record.EmiAmount}</span>
-      </div>
-      <div class="info-row">
-        <strong>Installment No:</strong> <span>${record.Installment}</span>
-      </div>
-      <div class="info-row">
-        <strong>Payment Status:</strong> <span>${record.Remarks}</span>
       </div>
       <div class="info-row">
         <strong>Due Date:</strong> <span>${EmiDate}</span>
@@ -156,8 +156,11 @@ export const handlePrint = (record: any) => {
       <div class="info-row">
         <strong>Balance To Be Paid:</strong> <span>${record.BalanceAmount}</span>
       </div>
+       <div class="info-row">
+        <strong>Payment Status:</strong> <span>${record.Remarks}</span>
+      </div>
       <div class="description">
-        "நன்றி,<strong>அமலி ஃபைனான்ஸ்</strong> தேர்வு செய்ததற்கு! உங்கள் நம்பிக்கை எங்கள் பொறுப்பை ஊக்குவிக்கிறது. உங்கள் கனவுகளை நனவாக்க. ஒவ்வொரு கட்டத்திலும் உங்களுடன் சேர்ந்து, பிரகாசமான நிதி எதிர்காலத்தை உருவாக்குவோம்."
+        " ,<strong>அமலி ஃபைனான்ஸ்</strong> தேர்வு செய்ததற்கு! உங்கள் நம்பிக்கை எங்கள் பொறுப்பை ஊக்குவிக்கிறது. உங்கள் கனவுகளை நனவாக்க. ஒவ்வொரு கட்டத்திலும் உங்களுடன் சேர்ந்து, பிரகாசமான நிதி எதிர்காலத்தை உருவாக்குவோம்."
       </div>
     </div>
   </body>
