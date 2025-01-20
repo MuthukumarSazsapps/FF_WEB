@@ -124,6 +124,9 @@ export const handlePrint = (record: any) => {
         </div>
       </div>
       <div class="info-row">
+        <strong>Reciept No:</strong> <span>${record.ReceiptNo}</span>
+      </div>
+      <div class="info-row">
         <strong>Loan Account:</strong> <span>${record.LoanId}</span>
       </div>
       <div class="info-row">
@@ -133,7 +136,7 @@ export const handlePrint = (record: any) => {
         <strong>Customer Name:</strong> <span>${record.CustomerName}</span>
       </div>
        <div class="info-row">
-        <strong>Vehicle:</strong> <span>${record.RegisterNumber}</span>
+        <strong>Vehicle No:</strong> <span>${record.RegisterNumber}</span>
       </div>
       <div class="info-row">
         <strong>Installment No:</strong> <span>${record.Installment}/${record.Tenure}</span>
