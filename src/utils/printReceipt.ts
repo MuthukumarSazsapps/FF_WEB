@@ -27,7 +27,7 @@ export const handlePrint = (record: any) => {
       }
 
       .receipt-container {
-        width: 58mm; /* Adjusted for 58mm thermal paper */
+        width: 75mm; /* Adjusted for 58mm thermal paper */
         padding: 0px;
         text-align: center;
         box-sizing: border-box;
@@ -59,7 +59,7 @@ export const handlePrint = (record: any) => {
         font-size: 12px;
       }
       .detail{
-        border-bottom:  1px dotted #000;
+        border-bottom:   1px dashed #000;
         margin: 0 0 5px 0;
         padding: 0;
       }
@@ -82,7 +82,7 @@ export const handlePrint = (record: any) => {
 
       .description {
         margin-top: 5px;
-        border-top: 1px dotted #000;
+        border-top:   1px dashed #000;
         padding-top: 3px;
         font-size: 9px;
         text-align: left;
