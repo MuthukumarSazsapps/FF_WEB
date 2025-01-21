@@ -27,7 +27,7 @@ export const handlePrint = (record: any) => {
       }
 
       .receipt-container {
-        width: 75mm; /* Adjusted for 58mm thermal paper */
+        width: 71mm; /* Adjusted for 58mm thermal paper */
         padding: 0px;
         text-align: center;
         box-sizing: border-box;
@@ -35,7 +35,7 @@ export const handlePrint = (record: any) => {
       }
 
       h2 {
-        margin: 1px 0;
+        margin:0;
         font-size: 18px;
       }
 
@@ -123,6 +123,7 @@ export const handlePrint = (record: any) => {
         <div class="info-row1">
           <p> <strong>Cell</strong>  : 9994994953</p> <p> <b>PH</b> : 04632-234996</p>
         </div>
+      <h2>Cash Receipt</h2>
       </div>
       <div class="info-row">
         <label>Reciept No:</label> <span>${record.ReceiptNo}</span>
