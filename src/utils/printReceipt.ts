@@ -11,7 +11,7 @@ export const handlePrint = (record: any) => {
   const currentDate = dayjs().format('DD-MM-YYYY');
   const currentTime = dayjs().format('hh:mm:ss A');
   const EmiDate = dayjs(record.EmiDate).format('DD-MM-YYYY');
-  const ReceiptTime = dayjs(record.ReceiptDate).format('DD-MM-YYYY');
+  const ReceiptDate = dayjs(record.ReceiptDate).format('DD-MM-YYYY');
 
   // Prepare the HTML content for the receipt
   const receiptHTML = `
@@ -27,10 +27,11 @@ export const handlePrint = (record: any) => {
       }
 
       .receipt-container {
-        width: 88mm; /* Adjusted for 58mm thermal paper */
+        width: 58mm; /* Adjusted for 58mm thermal paper */
         padding: 0px;
         text-align: center;
         box-sizing: border-box;
+        font: icon;
       }
 
       h2 {
@@ -67,7 +68,7 @@ export const handlePrint = (record: any) => {
       }
 
       .datetime{
-        margin: 1px 0;
+        margin: 0;
         display: flex;
         justify-content: space-between;
         font-size: 9px;
@@ -98,7 +99,7 @@ export const handlePrint = (record: any) => {
       /* Media query for larger paper sizes */
       @media print and (min-width: 210mm) {
         .receipt-container {
-          width: auto;
+          width: auto; 
         }
         body {
           font-size: 22px;
@@ -124,43 +125,43 @@ export const handlePrint = (record: any) => {
         </div>
       </div>
       <div class="info-row">
-        <strong>Reciept No:</strong> <span>${record.ReceiptNo}</span>
+        <label>Reciept No:</label> <span>${record.ReceiptNo}</span>
       </div>
       <div class="info-row">
-        <strong>Loan Account:</strong> <span>${record.LoanId}</span>
+        <label>Loan Account:</label> <span>${record.LoanId}</span>
       </div>
       <div class="info-row">
-        <strong>Customer Id:</strong> <span>${record.CustomerId}</span>
+        <label>Customer Id:</label> <span>${record.CustomerId}</span>
       </div>
       <div class="info-row">
-        <strong>Customer Name:</strong> <span>${record.CustomerName}</span>
+        <label>Customer Name:</label> <span>${record.CustomerName}</span>
       </div>
        <div class="info-row">
-        <strong>Vehicle No:</strong> <span>${record.RegisterNumber}</span>
+        <label>Vehicle No:</label> <span>${record.RegisterNumber}</span>
       </div>
       <div class="info-row">
-        <strong>Installment No:</strong> <span>${record.Installment}/${record.Tenure}</span>
+        <label>Installment No:</label> <span>${record.Installment}/${record.Tenure}</span>
       </div>
       <div class="info-row">
-        <strong>EMI Amount:</strong> <span>₹ ${record.EmiAmount}</span>
+        <label>EMI Amount:</label> <span>₹ ${record.EmiAmount}</span>
       </div>
       <div class="info-row">
-        <strong>Due Date:</strong> <span>${EmiDate}</span>
+        <label>Due Date:</label> <span>${EmiDate}</span>
       </div>
       <div class="info-row">
-        <strong>Receipt Date:</strong> <span>${ReceiptTime}</span>
+        <label>Receipt Date:</label> <span>${ReceiptDate}</span>
       </div>
       <div class="info-row">
-        <strong>Late Days:</strong> <span>${record.LateDays}</span>
+        <label>Late Days:</label> <span>${record.LateDays}</span>
       </div>
       <div class="info-row">
-        <strong>Late Fees:</strong> <span>${record.LateFees}</span>
+        <label>Late Fees:</label> <span>${record.LateFees}</span>
       </div>
       <div class="info-row">
-        <strong>Balance To Be Paid:</strong> <span>${record.BalanceAmount}</span>
+        <label>Balance To Be Paid:</label> <span>${record.BalanceAmount}</span>
       </div>
        <div class="info-row">
-        <strong>Payment Status:</strong> <span>${record.Remarks}</span>
+        <label>Payment Status:</label> <span>${record.Remarks}</span>
       </div>
       <div class="description">
         " ,<strong>அமலி ஃபைனான்ஸ்</strong> தேர்வு செய்ததற்கு! உங்கள் நம்பிக்கை எங்கள் பொறுப்பை ஊக்குவிக்கிறது. உங்கள் கனவுகளை நனவாக்க. ஒவ்வொரு கட்டத்திலும் உங்களுடன் சேர்ந்து, பிரகாசமான நிதி எதிர்காலத்தை உருவாக்குவோம்."
