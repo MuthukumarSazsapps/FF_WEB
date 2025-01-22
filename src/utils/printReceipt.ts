@@ -325,7 +325,7 @@ export const handlePrint = (record: any) => {
         <p>${currentTime}</p>
       </div>
       <div class="image-icon">
-        <img src='https://sazs-public-logos.s3.ap-south-1.amazonaws.com/amali.png' width='50' height='50'/>
+       
         <h2>AMALI AUTO FINANCE</h2>
       </div>
       <div class="detail">
