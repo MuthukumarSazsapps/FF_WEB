@@ -331,6 +331,7 @@ export const handlePrint = (record: any) => {
         <h2>AMALI AUTO FINANCE</h2>
       </div>
       <div class="detail">
+        <p class="address">GST.NO-33AFLPM6353A1ZP</p>
         <p class="address">924-B2 Main Road, Kovilpatti</p>
         <div class="info-row1">
           <p><strong>Cell</strong>: 9994994953</p>
