@@ -220,7 +220,7 @@ export const handlePrint = (record: any) => {
       }
 
       .receipt-container {
-        width: 72mm; /* Adjusted for 58mm thermal paper */
+        width: 73mm; /* Adjusted for 58mm thermal paper */
         padding: 10px;
         text-align: center;
         box-sizing: border-box;
@@ -239,7 +239,7 @@ export const handlePrint = (record: any) => {
         background-image: url('https://sazs-public-logos.s3.ap-south-1.amazonaws.com/amali.png'); /* Replace with your logo URL or base64 */
         background-size: 100%; /* Adjust size as needed */
         background-repeat: no-repeat;
-        opacity: 1; /* Makes it look like a watermark */
+        opacity: 0.7; /* Makes it look like a watermark */
         width: 50%; /* Adjust width */
         height: 50%; /* Adjust height */
         z-index: -1;
