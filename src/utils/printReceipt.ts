@@ -233,15 +233,15 @@ export const handlePrint = (record: any) => {
       .receipt-container::before {
         content: "";
         position: absolute;
-        top: 70%;
-        left: 50%;
+        top: 65%;
+        left: 52%;
         transform: translate(-50%, -50%);
         background-image: url('https://sazs-public-logos.s3.ap-south-1.amazonaws.com/amali.png'); /* Replace with your logo URL or base64 */
         background-size: 100%; /* Adjust size as needed */
         background-repeat: no-repeat;
-        opacity: 12.3; /* Makes it look like a watermark */
-        width: 100%; /* Adjust width */
-        height: 100%; /* Adjust height */
+        opacity: 1; /* Makes it look like a watermark */
+        width: 50%; /* Adjust width */
+        height: 50%; /* Adjust height */
         z-index: -1;
       }
 
@@ -304,7 +304,7 @@ export const handlePrint = (record: any) => {
 
       .image-icon {
         display: flex;
-       
+        justify-content: center;
       }
 
       /* Media query for larger paper sizes */
@@ -325,7 +325,6 @@ export const handlePrint = (record: any) => {
         <p>${currentTime}</p>
       </div>
       <div class="image-icon">
-       
         <h2>AMALI AUTO FINANCE</h2>
       </div>
       <div class="detail">
