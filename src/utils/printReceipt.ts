@@ -239,7 +239,7 @@ export const handlePrint = (record: any) => {
         background-image: url('https://sazs-public-logos.s3.ap-south-1.amazonaws.com/amali.png'); /* Replace with your logo URL or base64 */
         background-size: 100%; /* Adjust size as needed */
         background-repeat: no-repeat;
-        opacity: 0.1; /* Makes it look like a watermark */
+        opacity: 0.3; /* Makes it look like a watermark */
         width: 100%; /* Adjust width */
         height: 100%; /* Adjust height */
         z-index: -1;
