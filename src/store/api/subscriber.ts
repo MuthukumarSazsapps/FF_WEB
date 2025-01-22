@@ -29,19 +29,50 @@ const createSubscriber = async (
   formData.append('CreatedBy', CreatedBy);
   formData.append('StartDate', subscriberData.StartDate.toISOString());
   formData.append('EndDate', subscriberData.EndDate.toISOString());
-  let blob = await fetch(subscriberData.Logo).then(r => r.blob());
-  const myFile = new File([blob], `${Date.now()}.${blob.type.split('/').pop()}`, {
-    type: blob.type,
-  });
-  formData.append('Logo', myFile);
-  const response = await axiosInstance
-    .post(APIRoutes.subscriberCreate, formData)
-    .then(result => result.data)
-    .catch(err => {
-      console.log('Create Api error', err);
-      return;
+
+  // let blob = await fetch(subscriberData.Logo).then(r => r.blob());
+  // const myFile = new File([blob], `${Date.now()}.${blob.type.split('/').pop()}`, {
+  //   type: blob.type,
+  // });
+  // formData.append('Logo', myFile);
+
+  const logoURL = subscriberData.Logo || '';
+  if (logoURL) {
+    try {
+      const blob = await fetch(logoURL).then(r => r.blob());
+      const myFile = new File([blob], `${Date.now()}.${blob.type.split('/').pop()}`, {
+        type: blob.type,
+      });
+      formData.append('Logo', myFile);
+    } catch (error) {
+      console.warn('Failed to fetch Logo:', error);
+      formData.append('Logo', '');
+    }
+  } else {
+    formData.append('Logo', '');
+  }
+
+  // API Call
+  try {
+    const response = await axiosInstance.post(APIRoutes.subscriberCreate, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     });
-  return response.message;
+    return response.data.message;
+  } catch (error) {
+    console.error('Create API error:', error);
+    throw error;
+  }
+
+  // const response = await axiosInstance
+  //   .post(APIRoutes.subscriberCreate, formData)
+  //   .then(result => result.data)
+  //   .catch(err => {
+  //     console.log('Create Api error', err);
+  //     return;
+  //   });
+  // return response.message;
 };
 
 const getSubscriber = async (email: string) => {
@@ -124,24 +155,58 @@ const updateSubscriber = async (
   formData.append('ModifiedBy', ModifiedBy);
   formData.append('StartDate', updateData.StartDate.toISOString());
   formData.append('EndDate', updateData.EndDate.toISOString());
-  if (updateData.Logo) {
-    let blob = await fetch(updateData.Logo).then(r => r.blob());
-    const myFile = new File([blob], `${Date.now()}.${blob.type.split('/').pop()}`, {
-      type: blob.type,
-    });
-    formData.append('Logo', myFile);
+  formData.append('sendPassword', sendPassword.toString());
+
+  // if (updateData.Logo) {
+  //   let blob = await fetch(updateData.Logo).then(r => r.blob());
+  //   const myFile = new File([blob], `${Date.now()}.${blob.type.split('/').pop()}`, {
+  //     type: blob.type,
+  //   });
+  //   formData.append('Logo', myFile);
+  // } else {
+  //   formData.append('Logo', '');
+  // }
+
+  const photoURL = updateData.Logo || '';
+  if (photoURL) {
+    try {
+      const blob = await fetch(photoURL).then(r => r.blob());
+      const myFile = new File([blob], `${Date.now()}.${blob.type.split('/').pop()}`, {
+        type: blob.type,
+      });
+      formData.append('Logo', myFile);
+    } catch (error) {
+      console.warn('Failed to fetch Logo:', error);
+      formData.append('Logo', '');
+    }
   } else {
     formData.append('Logo', '');
   }
-  formData.append('sendPassword', sendPassword.toString());
-  const response = await axiosInstance
-    .put(`${APIRoutes.subscriberUpdate}/${subscriberId}`, formData)
-    .then(result => result.data)
-    .catch(err => {
-      console.log('Update Api error', err);
-      return;
-    });
-  return response?.message;
+
+  try {
+    const response = await axiosInstance.put(
+      `${APIRoutes.subscriberUpdate}/${subscriberId}`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return response.data.message;
+  } catch (error) {
+    console.error('Create API error:', error);
+    throw error;
+  }
+
+  // const response = await axiosInstance
+  //   .put(`${APIRoutes.subscriberUpdate}/${subscriberId}`, formData)
+  //   .then(result => result.data)
+  //   .catch(err => {
+  //     console.log('Update Api error', err);
+  //     return;
+  //   });
+  // return response?.message;
 };
 
 export default {
