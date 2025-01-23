@@ -255,12 +255,17 @@ export const handlePrint = (record: any) => {
         display: flex;
         justify-content: space-between;
         font-size: 12px;
+       
+      }
+      .info-row label{
+        font-weight: bold;
       }
 
       .info-row1 {
         margin: 0;
-        padding: 0;
+        padding: 2px 0;
         display: flex;
+        text-align: left;
         justify-content: space-between;
         font-size: 12px;
       }
@@ -328,17 +333,18 @@ export const handlePrint = (record: any) => {
         <h2>AMALI AUTO FINANCE</h2>
       </div>
       <div class="detail">
-        <p class="address">924-B2 Main Road, Kovilpatti</p>
+        <label class="address">924-B2 Main Road, Kovilpatti</label>
         <div class="info-row1">
           <div>
-             <label><b>Cell</b>: 9994994953</label><br>
-             <label class="address"><b>PH</b>: 04632-234996</label>
+             <label class=""><b>Cell</b>: 9994994953</label><br>
+             <label class=""><b>PH</b>: 04632-234996</label>
           </div>
           <div>
-           <label class="address">GST.NO : </label><br>
-           <label class="address">33AFLPM6353A1ZP</label>
-           </div>
+           <label class=""> <b>GST.NO </b> </label><br>
+           <label class="">33AFLPM6353A1ZP</label>
+          </div>
         </div>
+       
         <h2>Cash Receipt</h2>
       </div>
       <div class="info-row">
