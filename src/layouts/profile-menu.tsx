@@ -28,9 +28,7 @@ function DropdownMenu() {
   const { loginUser } = useUsers();
 
   const navigate = useNavigate();
-  const avatarUrl = loginUser?.ImageURL
-    ? `${process.env.REACT_APP_API_URL}/subscriber/${loginUser.ImageURL}`
-    : require('../images/sazslogo.jpg');
+  const avatarUrl = loginUser?.Logo ? loginUser.Logo : require('../images/sazslogo.jpg');
 
   const handleSignout = () => {
     dispatch(actions.logout());
@@ -117,9 +115,7 @@ export default function ProfileMenu({
     setIsOpen(false);
   }, [pathname]);
 
-  const avatarUrl = loginUser?.ImageURL
-    ? `${process.env.REACT_APP_API_URL}/subscriber/${loginUser.ImageURL}`
-    : require('../images/sazslogo.jpg');
+  const avatarUrl = loginUser?.Logo ? loginUser.Logo : require('../images/sazslogo.jpg');
 
   return (
     <Popover
@@ -137,6 +133,7 @@ export default function ProfileMenu({
         <img
           alt="avatar"
           src={avatarUrl}
+          width={50}
           className={cn('!h-13 w-13 sm:!h-10 sm:w-10 rounded-full', 'object-fill', avatarClassName)}
         />
       </button>

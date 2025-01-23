@@ -433,8 +433,8 @@ export default function SubscriberForm({ data, isEdit = false }: { data?: any; i
                   IsActive: data.IsActive ? '1' : '0',
                   StartDate: data.StartDate ? new Date(data.StartDate) : null,
                   EndDate: data.EndDate ? new Date(data.EndDate) : null,
-                  Password: 'Password@1',
-                  ConfirmPassword: 'Password@1',
+                  Password: 'Password@1Default',
+                  ConfirmPassword: 'Password@1Default',
                 }
               : subscriberFormDefaultValues,
           }}>

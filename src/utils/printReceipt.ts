@@ -389,7 +389,7 @@ export const handlePrint = (record: any) => {
     </div>
   </body>
 </html>
-  `;
+`;
 
   // Open the print window and write the receipt content
   const printWindow = window.open('', '_blank');

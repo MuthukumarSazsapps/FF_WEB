@@ -8,9 +8,7 @@ interface IconProps extends React.SVGProps<SVGSVGElement> {
 
 export default function Logo({ iconOnly = false, ...props }: IconProps) {
   const { loginUser } = useUsers();
-  const avatarUrl = loginUser?.Logo
-    ? `http://localhost:5000/subscriber/${loginUser.Logo}`
-    : require('../images/sazslogo.jpg');
+  const avatarUrl = loginUser?.Logo ? loginUser.Logo : require('../images/sazslogo.jpg');
   return (
     <div className="flex flex-row space-x-4 justify-center items-center">
       <img className="rounded-lg" src={avatarUrl} width={45} />
