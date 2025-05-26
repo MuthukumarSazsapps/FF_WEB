@@ -3,13 +3,16 @@ import * as XLSX from 'xlsx';
 import 'jspdf-autotable';
 import autoTable, { UserOptions, RowInput } from 'jspdf-autotable';
 import dayjs from 'dayjs';
+import {downloadcstfile} from '../store/api/customer'
 
 interface UserData {
   [key: string]: string | number | Date;
 }
 
-export function downloadFile(url: any, fileName: string) {
-  fetch(url)
+export function downloadFile (url: any, fileName: string) {
+  const key = url.replace("https://sazs-finance-app.s3.ap-south-1.amazonaws.com/", "");
+  const signedurl= downloadcstfile(key)
+  fetch(signedurl)
     .then(response => response.blob()) // Convert the response into a blob
     .then(blob => {
       const blobUrl = URL.createObjectURL(blob); // Create a temporary URL for the blob

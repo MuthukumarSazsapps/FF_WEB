@@ -280,7 +280,23 @@ const deleteCustomer = async (CustomerId: string, ModifiedBy: string) => {
   return response?.message;
 };
 
+const downloadcstfile = async (imagekey: string) => {
+  try {
+    const response = await axiosInstance
+      .post("getimagesignurl", { imagekey })
+      .then(result => result.url)
+      .catch(err => {
+        console.log('Get Menu Api error', err);
+        return err;
+      });
+    return response;
+  } catch (error) {
+    console.log('Error fetching Menu:', error);
+  }
+};
+
 export default {
+  downloadcstfile,
   listAllCustomers,
   getCustomer,
   createCustomer,
