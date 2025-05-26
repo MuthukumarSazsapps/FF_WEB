@@ -3,30 +3,79 @@ import * as XLSX from 'xlsx';
 import 'jspdf-autotable';
 import autoTable, { UserOptions, RowInput } from 'jspdf-autotable';
 import dayjs from 'dayjs';
-import {downloadcstfile} from '../store/api/customer'
+// import downloadcstfile from '../store/api/customer'
+import axiosInstance from 'store/api/axios';
 
 interface UserData {
   [key: string]: string | number | Date;
 }
 
-export function downloadFile (url: any, fileName: string) {
-  const key = url.replace("https://sazs-finance-app.s3.ap-south-1.amazonaws.com/", "");
-  const signedurl= downloadcstfile(key)
-  fetch(signedurl)
-    .then(response => response.blob()) // Convert the response into a blob
-    .then(blob => {
-      const blobUrl = URL.createObjectURL(blob); // Create a temporary URL for the blob
-      const anchor = document.createElement('a'); // Create an anchor element
-      anchor.href = blobUrl;
-      anchor.download = fileName; // Set the suggested download filename
-      document.body.appendChild(anchor); // Append the anchor to the DOM
-      anchor.click(); // Trigger the download
-      document.body.removeChild(anchor); // Clean up the DOM
-      URL.revokeObjectURL(blobUrl); // Revoke the temporary URL
-    })
-    .catch(error => {
-      console.error('Download failed:', error);
-    });
+// export async function downloadFile (url: any, fileName: string) {
+//   const key = url.replace("https://sazs-finance-app.s3.ap-south-1.amazonaws.com/", "");
+//   // const signedurl= await downloadcstfile(key)
+//   const signedurl = async (imagekey: string) => {
+//     try {
+//       const response = await axiosInstance
+//         .post("getimagesignurl", { imagekey })
+//         .then(result=> result)
+//         .catch(err => {
+//           console.log('Get Menu Api error', err);
+//           return err;
+//         });
+//       return response;
+//     } catch (error) {
+//       console.log('Error fetching Menu:', error);
+//     }
+//   };
+//   fetch(signedurl)
+//     .then(response => response.blob()) // Convert the response into a blob
+//     .then(blob => {
+//       const blobUrl = URL.createObjectURL(blob); // Create a temporary URL for the blob
+//       const anchor = document.createElement('a'); // Create an anchor element
+//       anchor.href = blobUrl;
+//       anchor.download = fileName; // Set the suggested download filename
+//       document.body.appendChild(anchor); // Append the anchor to the DOM
+//       anchor.click(); // Trigger the download
+//       document.body.removeChild(anchor); // Clean up the DOM
+//       URL.revokeObjectURL(blobUrl); // Revoke the temporary URL
+//     })
+//     .catch(error => {
+//       console.error('Download failed:', error);
+//     });
+// }
+
+export async function downloadFile(url: string | any, fileName: string) {
+  const key = url.replace('https://sazs-finance-app.s3.ap-south-1.amazonaws.com/', '');
+
+  // Get the signed URL from your API
+  let signedurl: string;
+  try {
+    const response = await axiosInstance.post('getimagesignurl', { imagekey: key });
+    signedurl = response.data?.signedUrl; // adjust based on your API response structure
+    if (!signedurl) {
+      throw new Error('Signed URL not found in response');
+    }
+  } catch (error) {
+    console.error('Failed to fetch signed URL:', error);
+    return;
+  }
+
+  // Download the file using the signed URL
+  try {
+    const blobResponse = await fetch(signedurl);
+    const blob = await blobResponse.blob();
+
+    const blobUrl = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = blobUrl;
+    anchor.download = fileName;
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+    URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    console.error('Download failed:', error);
+  }
 }
 
 export function exportToCSV(data: any[], fileName: string) {
